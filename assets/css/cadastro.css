@@ -1,0 +1,73 @@
+/* Reset e Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; /* Fundo branco */
+    color: #333;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container de Escolha */
+.choice-container {
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 50px 70px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Logo */
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    max-width: 250px;
+    height: auto;
+}
+
+/* Título "SOU" */
+.choice-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+/* Grupo de Botões */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    /* Gradiente dos botões */
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px; 
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #4a9f60, #346f86);
+}

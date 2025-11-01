@@ -1,0 +1,192 @@
+/* Reset e Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 0;
+}
+
+/* Container do Formulário */
+.form-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+}
+
+/* Logo */
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    max-width: 280px;
+    height: auto;
+}
+
+/* Grid do Formulário */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px; /* 20px vertical, 40px horizontal */
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Colunas do Formulário */
+.form-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Campos do Formulário (Inputs e Labels) */
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+input[type="date"] {
+    color: #555;
+}
+
+small {
+    font-size: 11px;
+    color: #777;
+    margin-top: -8px;
+    margin-bottom: 10px;
+}
+
+/* Grupo de Senha (para o ícone) */
+.input-group {
+    position: relative;
+    display: flex;
+}
+
+.input-group input {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.icon-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+}
+
+/* Mensagens de Erro */
+.senha-erro {
+    font-size: 12px;
+    color: #d93025;
+    height: 15px;
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+
+/* Link de Login */
+.login-link {
+    display: block;
+    font-size: 12px;
+    text-decoration: none;
+    color: #007bff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+}
+
+/* Botão de Cadastro */
+button[type="submit"] {
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition:0.3s ease;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(to right, #4a9f60, #346f86);
+}
+
+button[type="submit"]:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.contrast-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.contrast-toggle button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.contrast-toggle img {
+    width: 48px;
+    height: 48px; 
+    object-fit: contain;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+}

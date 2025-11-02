@@ -1,42 +1,24 @@
 /* --- Seleção dos Elementos do DOM --- */
 document.addEventListener('DOMContentLoaded', () => {
 
-    const form = document.getElementById('cadastro-form');
     const senhaInput = document.getElementById('senha');
     const confirmarSenhaInput = document.getElementById('confirmar_senha');
-    const submitBtn = document.getElementById('submit-btn');
-    const erroSenha = document.getElementById('erro-senha');
     const erroConfirmarSenha = document.getElementById('erro-confirmar-senha');
-
     const cpfInput = document.getElementById('cpf');
     const telefoneInput = document.getElementById('telefone');
-
     const toggleSenhaBtn = document.getElementById('toggle-senha');
     const toggleConfirmarSenhaBtn = document.getElementById('toggle-confirmar-senha');
 
-
-
+    /* --- Funções de Validação (Apenas Correspondência) --- */
     function verificaSenhas() {
-        if (confirmarSenhaInput.value.length === 0) {
+        if (confirmarSenhaInput.value.length === 0 && senhaInput.value.length === 0) {
             erroConfirmarSenha.textContent = '';
-            return false;
+            return;
         }
         if (senhaInput.value !== confirmarSenhaInput.value) {
             erroConfirmarSenha.textContent = 'As senhas não coincidem.';
-            return false;
-        }
-        erroConfirmarSenha.textContent = '';
-        return true;
-    }
-
-    function habilitarBotao() {
-        const senhaValida = validarSenhaComplexa();
-        const senhasCoincidem = verificaSenhas();
-
-        if (senhaValida && senhasCoincidem) {
-            submitBtn.disabled = false;
         } else {
-            submitBtn.disabled = true;
+            erroConfirmarSenha.textContent = '';
         }
     }
 
@@ -45,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let v = e.target.value.replace(/\D/g, '');
         v = v.replace(/^(\d{2})(\d)/g, '($1) $2');
         v = v.replace(/(\d{5})(\d)/, '$1-$2');
-        v = v.slice(0, 15); // Limita ao formato (00) 00000-0000
+        v = v.slice(0, 15);
         e.target.value = v;
     }
 
@@ -54,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         v = v.replace(/(\d{3})(\d)/, '$1.$2');
         v = v.replace(/(\d{3})(\d)/, '$1.$2');
         v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-        v = v.slice(0, 14); // Limita ao formato 000.000.000-00
+        v = v.slice(0, 14);
         e.target.value = v;
     }
 
@@ -71,23 +53,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    senhaInput.addEventListener('input', habilitarBotao);
-    confirmarSenhaInput.addEventListener('input', habilitarBotao);
+    /* --- Event Listeners --- */
+    senhaInput.addEventListener('input', verificaSenhas);
+    confirmarSenhaInput.addEventListener('input', verificaSenhas);
 
-    cpfInput.addEventListener('input', formatarCPF);
-    telefoneInput.addEventListener('input', formatarTelefone);
+    if (cpfInput) {
+        cpfInput.addEventListener('input', formatarCPF);
+    }
+    if (telefoneInput) {
+        telefoneInput.addEventListener('input', formatarTelefone);
+    }
 
-    toggleSenhaBtn.addEventListener('click', () => {
-        toggleSenha(senhaInput, toggleSenhaBtn.querySelector('i'));
-    });
+    if (toggleSenhaBtn) {
+        toggleSenhaBtn.addEventListener('click', () => {
+            toggleSenha(senhaInput, toggleSenhaBtn.querySelector('i'));
+        });
+    }
 
-    toggleConfirmarSenhaBtn.addEventListener('click', () => {
-        toggleSenha(confirmarSenhaInput, toggleConfirmarSenhaBtn.querySelector('i'));
-    });
-
-    form.addEventListener('submit', (e) => {
-        if (submitBtn.disabled) {
-            e.preventDefault(); // Impede o envio se o botão estiver desabilitado
-        }
-    });
+    if (toggleConfirmarSenhaBtn) {
+        toggleConfirmarSenhaBtn.addEventListener('click', () => {
+            toggleSenha(confirmarSenhaInput, toggleConfirmarSenhaBtn.querySelector('i'));
+        });
+    }
 });

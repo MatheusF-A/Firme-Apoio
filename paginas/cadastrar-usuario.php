@@ -15,7 +15,7 @@
             <img src="../assets/img/logoLado.png" alt="Firme Apoio Logo">
         </div>
 
-        <form action="cadastrar-usuariobd.php" method="POST" id="cadastro-form">
+        <form action="../controles/cadastrar-usuariobd.php" method="POST" id="cadastro-form">
             
             <div class="form-grid">
                 <div class="form-column">
@@ -55,9 +55,9 @@
                 </div>
             </div>
 
-            <a href="index.php" class="login-link">Já possui uma conta? Faça Login aqui!</a>
+            <a href="login.php" class="login-link">Já possui uma conta? Faça Login aqui!</a>
 
-            <button type="submit" id="submit-btn" disabled>CADASTRAR-SE</button>
+            <button type="submit" id="submit-btn">CADASTRAR-SE</button>
         </form>
     </div>
 
@@ -65,7 +65,7 @@
         <img src="../assets/img/contrast.png" alt="Toggle Contrast">
     </div>
 
-    <script src="../assets/js/cadastro-usuario.js" defer></script>
+    <script src="../assets/js/cadastro-form.js" defer></script>
 
 </body>
 </html>

@@ -1,0 +1,223 @@
+/*
+ * CSS para a seção de Auto Cuidado (Abas, Formulário, Emojis)
+ */
+
+/* ----> 1. CORREÇÃO DE LAYOUT <---- */
+.main-content {
+    margin-left: 260px; /* Abre espaço para a sidebar */
+    padding: 30px;
+    overflow-y: auto;
+}
+/* ----> FIM DA CORREÇÃO <---- */
+
+/* --- Navegação por Abas --- */
+.autocuidado-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab-link {
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.tab-link:hover {
+    background-color: #f9f9f9;
+    color: #000;
+}
+
+.tab-link.active {
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: #ffffff;
+    border-color: #4089a4;
+}
+.tab-link.active i {
+    color: #ffffff;
+}
+
+/* --- Container da Avaliação --- */
+.avaliacao-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+}
+
+.avaliacao-container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3a47;
+    margin-bottom: 20px;
+}
+.avaliacao-container h2:first-of-type {
+    margin-bottom: 10px;
+}
+
+/* --- Seletor de Humor (Emojis) --- */
+.mood-selector {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+/* Esconde o radio button real */
+.mood-selector input[type="radio"] {
+    display: none;
+}
+
+.mood-emoji {
+    font-size: 48px; 
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    filter: grayscale(80%); 
+    opacity: 0.7;
+}
+
+.mood-emoji:hover {
+    transform: scale(1.2);
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+/* Estilo do emoji SELECIONADO */
+.mood-selector input[type="radio"]:checked + .mood-emoji {
+    transform: scale(1.3);
+    filter: grayscale(0%);
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(255, 200, 0, 0.7); 
+}
+
+/* --- Formulário de Perguntas --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group small {
+    font-size: 13px;
+    color: #777;
+    display: block;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box; 
+    resize: vertical;
+}
+
+/* Botão Enviar */
+.btn-enviar {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: white;
+    min-width: 150px;
+}
+
+.btn-enviar:hover {
+    opacity: 0.9;
+}
+
+.btn-enviar:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+/* ----> 2. ADICIONADO: Estilos Mobile Header e Overlay <---- */
+.mobile-header {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    color: #2c3a47;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 900;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.mobile-logo { height: 40px; }
+.mobile-logo img { height: 100%; width: auto; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+/* ----> FIM DA ADIÇÃO <---- */
+
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    
+    /* ----> 3. ADICIONADO: Correção do Layout Mobile <---- */
+    .mobile-header {
+        display: flex;
+    }
+    
+    .main-content {
+        margin-left: 0; /* Remove a margem da sidebar */
+        padding-top: 75px; /* Adiciona espaço para o header mobile */
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    body.sidebar-open .overlay {
+        display: block;
+    }
+    body.sidebar-open {
+        overflow: hidden;
+    }
+    /* ----> FIM DA CORREÇÃO <---- */
+
+    .autocuidado-tabs {
+        flex-direction: column;
+    }
+    
+    .mood-emoji {
+        font-size: 36px; /* Emojis menores no celular */
+    }
+
+    .avaliacao-container h2 {
+        font-size: 20px;
+    }
+    .form-group label {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,249 @@
+/* --- Estilos Base do Dashboard --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.content-header {
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.content-header h1 {
+    font-size: 24px;
+}
+
+/* --- Estilos do Formulário de Cadastro --- */
+.form-cadastro-local {
+    width: 100%;
+}
+
+.form-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+/* Coluna da Imagem */
+.form-col-imagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagem-upload-label {
+    cursor: pointer;
+}
+
+.imagem-preview {
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    background-size: cover;
+    background-position: center;
+    transition: background-color 0.2s;
+}
+
+.imagem-preview:hover {
+    background-color: #f0f0f0;
+}
+
+.imagem-preview .default-icon {
+    font-size: 48px;
+    color: #cccccc;
+}
+
+.imagem-preview-text {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+/* Esconde o input[file] padrão */
+#imagem {
+    display: none;
+}
+
+/* Coluna dos Inputs */
+.form-col-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos de Label e Input */
+label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    box-sizing: border-box; /* Garante que o padding não quebre o layout */
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Colunas de 100% de largura */
+.form-col-full {
+    width: 100%;
+}
+
+/* Colunas divididas */
+.form-col-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Botões de Ação */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-voltar,
+.btn-enviar {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.btn-voltar {
+    background-color: #e74c3c; /* Vermelho */
+    color: white;
+}
+.btn-voltar:hover {
+    background-color: #c0392b;
+}
+
+.btn-enviar {
+    background-color: #3498db; /* Azul */
+    color: white;
+}
+.btn-enviar:hover {
+    background-color: #2980b9;
+}
+
+
+/* --- Estilos Mobile Header e Overlay (Copiado de ajuda-externa.css) --- */
+.mobile-header {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    color: #2c3a47;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 900;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.mobile-logo { height: 40px; }
+.mobile-logo img { height: 100%; width: auto; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .form-grid {
+        grid-template-columns: 1fr; /* Empilha a imagem e os inputs */
+    }
+    .form-col-imagem {
+        align-items: center;
+    }
+    .imagem-preview {
+        width: 100%; /* Imagem ocupa a largura total */
+        max-width: 300px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        display: block; 
+    }
+    .mobile-header {
+        display: flex;
+    }
+    .main-content {
+        padding-top: 75px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    body.sidebar-open .overlay {
+        display: block;
+    }
+    body.sidebar-open {
+        overflow: hidden;
+    }
+
+    /* Empilha Telefone e Email */
+    .form-col-split {
+        grid-template-columns: 1fr;
+        gap: 0; /* Remove o 'gap' para os inputs ficarem juntos */
+    }
+    
+    /* Botões em 100% */
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-voltar,
+    .btn-enviar {
+        justify-content: center;
+        width: 100%;
+    }
+}

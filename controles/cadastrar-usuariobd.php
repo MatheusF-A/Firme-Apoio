@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 } else {
-    header("Location: cadastrar-usuario.php");
+    header("Location: ../paginas/cadastrar-usuario.php");
     exit();
 }
 ?>

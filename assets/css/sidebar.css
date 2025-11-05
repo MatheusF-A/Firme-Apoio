@@ -1,6 +1,19 @@
-/* --- Estilos do Componente Sidebar --- */
+/* ----> 1. RESET GLOBAL ADICIONADO AQUI <---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Sidebar */
+/* ----> 2. ESTILO GLOBAL DO BODY ADICIONADO AQUI <---- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* --- Estilos do Componente Sidebar --- */
 .sidebar {
     width: 260px;
     background-color: #ffffff;
@@ -11,27 +24,30 @@
     min-height: 100vh;
     transition: transform 0.3s ease-in-out;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
 }
 
 .sidebar .logo {
-    padding: 10px 20px 10px 10px;
-    text-align: left;
-    margin-left: 10px;
+    padding: 30px 20px;
+    text-align: center;
 }
-
 .sidebar .logo img {
-    max-width: 80%;
+    max-width: 90%;
     height: auto;
 }
 
-/* Navegação da Sidebar */
+/* Navegação */
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     padding: 0 15px;
 }
-
 .sidebar-nav a {
     color: #2c3a47;
     text-decoration: none;
@@ -43,17 +59,14 @@
     transition: background-color 0.2s ease;
     border-radius: 8px;
 }
-
 .sidebar-nav a i {
     margin-right: 15px;
     width: 20px;
     text-align: center;
 }
-
 .sidebar-nav a:hover {
     background-color: #f4f7f6;
 }
-
 .sidebar-nav a.active {
     background: linear-gradient(to right, #54b36c, #4089a4);
     color: #ffffff;
@@ -61,30 +74,26 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Rodapé da Sidebar */
+/* Rodapé */
 .sidebar-footer {
     padding: 20px;
 }
-
 .footer-divider {
     border: none;
     height: 1px;
     background-color: #e0e0e0;
     margin: 0 0 20px 0;
 }
-
 .user-profile {
     display: flex;
     align-items: center;
     padding: 0; 
     margin-bottom: 15px; 
 }
-
 .user-profile .fa-user-circle {
     font-size: 28px;
     margin-right: 10px;
 }
-
 .user-details {
     display: flex;
     flex-direction: column;
@@ -98,7 +107,6 @@
     font-size: 12px;
     color: #888;
 }
-
 .logout-link {
     display: block;
     color: #555;
@@ -121,21 +129,19 @@
     margin-bottom: 15px;
     width: 100%;
 }
-
 .sidebar-footer .contrast-icon {
     width: 24px;
     height: 24px;
     margin-right: 10px;
     flex-shrink: 0;
 }
-
 .sidebar-footer .contrast-label {
     font-size: 14px;
     font-weight: 600;
     flex-grow: 1;
 }
 
-/* --- Estilos do Toggle Switch (Botão deslizante) --- */
+/* Switch */
 .switch-toggle {
     position: relative;
     display: inline-block;
@@ -143,13 +149,11 @@
     height: 28px;
     flex-shrink: 0;
 }
-
 .switch-toggle input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
 .slider {
     position: absolute;
     cursor: pointer;
@@ -161,7 +165,6 @@
     transition: .3s;
     border-radius: 28px;
 }
-
 .slider:before {
     position: absolute;
     content: "";
@@ -173,28 +176,19 @@
     transition: .3s;
     border-radius: 50%;
 }
-
 input:checked + .slider {
     background-color: #54b36c;
 }
-
 input:checked + .slider:before {
     transform: translateX(22px);
     background-color: #ffffff;
 }
 
-/* --- Estilos de Responsividade (Sidebar) --- */
-
+/* Responsividade */
 @media (max-width: 768px) {
     .sidebar {
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100%;
-        z-index: 1000;
         transform: translateX(-100%);
     }
-
     body.sidebar-open .sidebar {
         transform: translateX(0);
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);

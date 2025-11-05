@@ -1,14 +1,6 @@
-/* --- Estilos Base do Dashboard --- */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
-    display: flex;
-    min-height: 100vh;
-}
-
+/* --- Layout Principal (Corrigido) --- */
 .main-content {
-    flex-grow: 1;
+    margin-left: 260px; /* Abre espaço para a sidebar */
     padding: 30px;
     overflow-y: auto;
 }
@@ -24,6 +16,31 @@ body {
 .content-header h1 {
     font-size: 24px;
 }
+
+/* --- Caixas de Alerta (Sucesso/Erro) --- */
+.alert-message {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+.alert-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.alert-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.alert-message i {
+    font-size: 20px;
+}
+
 
 /* --- Estilos do Formulário de Cadastro --- */
 .form-cadastro-local {
@@ -116,7 +133,7 @@ textarea {
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 14px;
-    box-sizing: border-box; /* Garante que o padding não quebre o layout */
+    box-sizing: border-box; 
 }
 
 textarea {
@@ -175,8 +192,13 @@ textarea {
     background-color: #2980b9;
 }
 
+.btn-enviar:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
 
-/* --- Estilos Mobile Header e Overlay (Copiado de ajuda-externa.css) --- */
+
+/* --- Estilos Mobile Header e Overlay --- */
 .mobile-header {
     display: none; 
     position: fixed;
@@ -212,17 +234,22 @@ textarea {
 }
 
 @media (max-width: 768px) {
-    body {
-        display: block; 
-    }
+    /* body { display: block; } <-- REMOVIDO */
+    
     .mobile-header {
         display: flex;
     }
+    
+    /* ----> CORREÇÃO MOBILE <---- */
     .main-content {
-        padding-top: 75px;
+        margin-left: 0; /* Remove a margem */
+        padding-top: 75px; /* Adiciona espaço para o header */
         padding-left: 15px;
         padding-right: 15px;
     }
+    /* ----> FIM DA CORREÇÃO <---- */
+
+
     body.sidebar-open .overlay {
         display: block;
     }
@@ -233,7 +260,7 @@ textarea {
     /* Empilha Telefone e Email */
     .form-col-split {
         grid-template-columns: 1fr;
-        gap: 0; /* Remove o 'gap' para os inputs ficarem juntos */
+        gap: 0; 
     }
     
     /* Botões em 100% */

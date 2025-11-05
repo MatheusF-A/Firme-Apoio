@@ -1,7 +1,24 @@
 <?php
+/*
+ * Este componente espera que session_start() já tenha sido chamado
+ * na página que o incluiu.
+ */
+
 if (!isset($paginaAtiva)) {
-    $paginaAtiva = ''; 
+    $paginaAtiva = ''; // Padrão
 }
+
+
+// Define o link padrão (para usuário)
+$linkInicio = 'dashboard-usuario.php'; 
+
+// Verifica se a sessão de perfil existe E se é um voluntário
+if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'voluntario') {
+    // Se for voluntário, muda o link
+    $linkInicio = 'dashboard-voluntario.php';
+}
+
+
 ?>
 <aside class="sidebar">
     <div class="logo">
@@ -9,9 +26,11 @@ if (!isset($paginaAtiva)) {
     </div>
 
     <nav class="sidebar-nav">
-        <a href="dashboard_usuario.php" class="<?php echo ($paginaAtiva === 'inicio') ? 'active' : ''; ?>">
+        
+        <a href="<?php echo $linkInicio; ?>" class="<?php echo ($paginaAtiva === 'inicio') ? 'active' : ''; ?>">
             <i class="fas fa-home"></i> Início
         </a>
+
         <a href="conteudos.php" class="<?php echo ($paginaAtiva === 'conteudos') ? 'active' : ''; ?>">
             <i class="fas fa-book-open"></i> Conteúdos
         </a>

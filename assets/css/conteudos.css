@@ -1,0 +1,164 @@
+/* ---- 1. RESET E LAYOUT BASE ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    min-height: 100vh;
+}
+
+.main-content {
+    margin-left: 260px; /* Abre espaço para a sidebar */
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* Header de "Central de Conteúdos" */
+.content-header {
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.content-header h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+.content-header p {
+    font-size: 16px;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+/* Grid de Cards de Escolha */
+.choice-grid {
+    display: grid;
+    /* 3 colunas em desktop */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+/* Estilo do Card Individual */
+.choice-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 4px solid #4089a4; /* Borda azul padrão */
+}
+
+.choice-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo do Card de Gerenciamento (Voluntário) */
+.choice-card.card-manage {
+    background-color: #fffaf0; /* Fundo levemente amarelado */
+    border-left: 4px solid #f39c12; /* Borda laranja */
+}
+.choice-card.card-manage .card-icon {
+    color: #f39c12;
+    background-color: #fffaf0;
+}
+
+
+.card-icon {
+    font-size: 28px;
+    color: #4089a4; /* Cor do gradiente */
+    margin-bottom: 15px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f8ff;
+    border-radius: 50%;
+}
+
+.choice-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3a47;
+}
+
+.choice-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    flex-grow: 1; /* Garante que os cards tenham a mesma altura */
+}
+
+/* --- Estilos Mobile Header e Overlay (Necessários) --- */
+.mobile-header {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    color: #2c3a47;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 900;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.mobile-logo { height: 40px; }
+.mobile-logo img { height: 100%; width: auto; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+
+/* --- Responsividade --- */
+
+/* Telas Médias (Tablets) */
+@media (max-width: 992px) {
+    .choice-grid {
+        /* 2 colunas em tablet */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Telas Pequenas (Celulares) */
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+    
+    .main-content {
+        margin-left: 0; /* Remove a margem da sidebar */
+        padding-top: 75px; /* Adiciona espaço para o header mobile */
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    body.sidebar-open .overlay {
+        display: block;
+    }
+    body.sidebar-open {
+        overflow: hidden;
+    }
+
+    .choice-grid {
+        /* 1 coluna em celular */
+        grid-template-columns: 1fr;
+    }
+    
+    .content-header h1 {
+        font-size: 24px;
+    }
+}

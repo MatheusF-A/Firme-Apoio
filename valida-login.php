@@ -47,7 +47,7 @@ if (isset($_POST['login']) && isset($_POST['senha'])) {
             $_SESSION['perfil'] = 'voluntario'; // Define o perfil
 
             // Redireciona para o dashboard do voluntário
-            header("Location: dashboard_voluntario.php");
+            header("Location: ./paginas/dashboard-voluntario.php");
             exit();
         }
 

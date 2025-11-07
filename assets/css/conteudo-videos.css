@@ -1,0 +1,263 @@
+/* ---- 1. RESET E LAYOUT BASE ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    min-height: 100vh;
+}
+
+.main-content {
+    margin-left: 260px; /* Abre espaço para a sidebar */
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* --- 2. ABAS DE NAVEGAÇÃO E HEADER --- */
+/* NOVO: Header que agrupa abas e botão */
+.conteudos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.autocuidado-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap; /* Permite que as abas quebrem a linha se necessário */
+}
+.tab-link {
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.tab-link:hover {
+    background-color: #f9f9f9;
+    color: #000;
+}
+.tab-link.active {
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: #ffffff;
+    border-color: #4089a4;
+}
+.tab-link.active i {
+    color: #ffffff;
+}
+
+/* NOVO: Botão "Cadastrar Vídeo" */
+.btn-novo-item {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    background: linear-gradient(to right, #54b36c, #4089a4);
+    color: white;
+    flex-shrink: 0; /* Impede que o botão encolha */
+}
+.btn-novo-item:hover {
+    opacity: 0.9;
+}
+
+/* NOVO: Caixas de Alerta (Sucesso/Erro) */
+.alert-message {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+.alert-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.alert-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.alert-message i {
+    font-size: 20px;
+}
+
+
+/* --- 3. GRID DE VÍDEOS --- */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.video-card {
+    position: relative; /* ADICIONADO: Para o botão de deletar */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* NOVO: Botão Deletar (Ícone) */
+.btn-deletar-item {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(231, 76, 60, 0.9); /* Vermelho */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+.btn-deletar-item:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
+}
+.btn-deletar-item i {
+    font-size: 14px;
+}
+
+
+/* Player (Iframe) */
+.video-player-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9; 
+    background-color: #000;
+}
+.video-player-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* Detalhes do Vídeo */
+.video-details {
+    padding: 20px;
+}
+.video-details h3 {
+    font-size: 16px; 
+    font-weight: 600;
+    color: #2c3a47;
+    margin-bottom: 15px;
+}
+.video-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #555;
+}
+.video-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.video-meta i.fa-youtube {
+    color: #FF0000;
+}
+.video-meta a {
+    color: #555;
+    text-decoration: none;
+    font-weight: 600;
+}
+.video-meta a:hover {
+    text-decoration: underline;
+}
+
+/* --- 4. LAYOUT MOBILE --- */
+.mobile-header {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    color: #2c3a47;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 900;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.mobile-logo { height: 40px; }
+.mobile-logo img { height: 100%; width: auto; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+
+@media (max-width: 992px) {
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+    .main-content {
+        margin-left: 0;
+        padding-top: 75px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    body.sidebar-open .overlay {
+        display: block;
+    }
+    body.sidebar-open {
+        overflow: hidden;
+    }
+    
+    .conteudos-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .btn-novo-item {
+        width: 100%;
+        justify-content: center;
+    }
+    .autocuidado-tabs {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+}

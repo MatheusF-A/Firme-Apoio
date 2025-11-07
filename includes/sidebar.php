@@ -8,16 +8,17 @@ if (!isset($paginaAtiva)) {
     $paginaAtiva = ''; // Padrão
 }
 
+// ----> INÍCIO DA LÓGICA DO LINK DINÂMICO (ATUALIZADA) <----
+// 1. Define o perfil (padrão 'usuario')
+$perfil = $_SESSION['perfil'] ?? 'usuario';
 
-// Define o link padrão (para usuário)
-$linkInicio = 'dashboard-usuario.php'; 
+// 2. Define o link de "Início"
+// (Volta ao dashboard de cards para o voluntário)
+$linkInicio = ($perfil === 'voluntario') ? 'dashboard_voluntario.php' : 'dashboard_usuario.php';
 
-// Verifica se a sessão de perfil existe E se é um voluntário
-if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'voluntario') {
-    // Se for voluntário, muda o link
-    $linkInicio = 'dashboard-voluntario.php';
-}
-
+// 3. Define o link de "Auto Cuidado" (que vira "Acompanhamento" para voluntários)
+$linkAutoCuidado = ($perfil === 'voluntario') ? 'acompanhamento.php' : 'auto-cuidado.php';
+// ----> FIM DA LÓGICA DO LINK DINÂMICO <----
 
 ?>
 <aside class="sidebar">
@@ -27,16 +28,22 @@ if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'voluntario') {
 
     <nav class="sidebar-nav">
         
+        <!-- Link "Início" corrigido -->
         <a href="<?php echo $linkInicio; ?>" class="<?php echo ($paginaAtiva === 'inicio') ? 'active' : ''; ?>">
             <i class="fas fa-home"></i> Início
         </a>
-
+        
         <a href="conteudos.php" class="<?php echo ($paginaAtiva === 'conteudos') ? 'active' : ''; ?>">
             <i class="fas fa-book-open"></i> Conteúdos
         </a>
-        <a href="auto-cuidado.php" class="<?php echo ($paginaAtiva === 'auto-cuidado') ? 'active' : ''; ?>">
-            <i class="fas fa-heart"></i> Auto Cuidado
+        
+        <!-- Link "Auto Cuidado" agora é dinâmico -->
+        <a href="<?php echo $linkAutoCuidado; ?>" class="<?php echo ($paginaAtiva === 'auto-cuidado') ? 'active' : ''; ?>">
+            <i class="fas fa-heart"></i> 
+            <!-- O texto também muda -->
+            <?php echo ($perfil === 'voluntario') ? 'Acompanhamento' : 'Auto Cuidado'; ?>
         </a>
+        
         <a href="desabafo.php" class="<?php echo ($paginaAtiva === 'desabafo') ? 'active' : ''; ?>">
             <i class="fas fa-comment-dots"></i> Desabafo
         </a>

@@ -73,7 +73,7 @@ $linkAutoCuidado = ($perfil === 'voluntario') ? 'acompanhamento.php' : 'auto-cui
             </div>
         </div>
         
-        <a href="logout.php" class="logout-link">
+        <a href="../logout.php" class="logout-link">
             <i class="fas fa-sign-out-alt"></i> Sair
         </a>
     </div>

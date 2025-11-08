@@ -1,0 +1,230 @@
+/* ---- 1. RESET E LAYOUT BASE ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo-pagina);
+    color: var(--cor-texto-secundaria);
+    min-height: 100vh;
+}
+
+.main-content {
+    margin-left: 260px; /* Abre espaço para a sidebar */
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* Header da Moderação (reutilizado de gerenciar-depoimentos) */
+.content-header-admin {
+    background-color: var(--cor-fundo-card-secundario);
+    border: 1px solid var(--cor-borda-clara);
+    color: var(--cor-texto-primaria);
+    padding: 20px 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+.content-header-admin h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.content-header-admin p {
+    font-size: 16px;
+    color: var(--cor-texto-secundaria);
+}
+
+/* Caixas de Alerta */
+.alert-message {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+.alert-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+body.high-contrast .alert-message.success {
+    background-color: var(--cor-btn-success);
+    color: var(--cor-texto-sobre-gradiente);
+}
+.alert-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+body.high-contrast .alert-message.error {
+    background-color: var(--cor-btn-danger);
+    color: var(--cor-texto-sobre-gradiente);
+}
+.alert-message i {
+    font-size: 20px;
+}
+
+
+/* --- 2. LISTAS DE ACOMPANHAMENTO --- */
+.acompanhamento-container {
+    background-color: var(--cor-fundo-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--cor-sombra);
+    padding: 20px 30px 30px 30px;
+    margin-bottom: 30px;
+}
+.acompanhamento-container h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cor-texto-primaria);
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--cor-borda-clara);
+    margin-bottom: 20px;
+}
+
+.lista-vazia {
+    text-align: center;
+    font-size: 16px;
+    color: var(--cor-texto-terciaria);
+    padding: 20px 0;
+}
+
+.lista-usuarios {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.usuario-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid var(--cor-borda-clara);
+    border-radius: 8px;
+    background-color: var(--cor-fundo-pagina);
+}
+
+.usuario-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.usuario-info i {
+    font-size: 24px;
+    color: var(--cor-texto-terciaria);
+}
+.usuario-info i.fa-user-check { /* Cor 'Meus Pacientes' */
+    color: var(--cor-gradiente-texto);
+}
+.usuario-info i.fa-user-plus { /* Cor 'Disponíveis' */
+    color: var(--cor-btn-edit);
+}
+
+.usuario-info h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--cor-texto-primaria);
+}
+.usuario-info span {
+    font-size: 14px;
+    color: var(--cor-texto-secundaria);
+}
+
+.usuario-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Botões */
+.btn-crud {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+.btn-adicionar {
+    background-color: var(--cor-btn-success);
+    color: var(--cor-texto-sobre-gradiente);
+}
+.btn-adicionar:hover {
+    background-color: var(--cor-btn-success-hover);
+}
+
+.btn-remover {
+    background-color: var(--cor-btn-danger);
+    color: #ffffff;
+}
+.btn-remover:hover {
+    background-color: var(--cor-btn-danger-hover);
+}
+
+.btn-relatorio {
+    background-color: var(--cor-btn-edit);
+    color: #ffffff;
+}
+.btn-relatorio:hover {
+    background-color: var(--cor-btn-edit-hover);
+}
+
+
+/* --- 3. LAYOUT MOBILE --- */
+.mobile-header {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--cor-fundo-sidebar);
+    color: var(--cor-texto-primaria);
+    align-items: center;
+    padding: 0 15px;
+    z-index: 900;
+    box-shadow: 0 2px 5px var(--cor-sombra);
+}
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; }
+.mobile-logo { height: 40px; }
+.mobile-logo img { height: 100%; width: auto; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+    .main-content {
+        margin-left: 0;
+        padding-top: 75px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    body.sidebar-open .overlay {
+        display: block;
+    }
+    body.sidebar-open {
+        overflow: hidden;
+    }
+    
+    .usuario-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .usuario-actions {
+        flex-direction: column;
+    }
+    .btn-crud {
+        justify-content: center;
+    }
+}

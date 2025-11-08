@@ -1,0 +1,170 @@
+/* ---- 1. RESET E LAYOUT BASE ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--cor-fundo-pagina);
+    color: var(--cor-texto-secundaria);
+    min-height: 100vh;
+}
+
+.main-content {
+    margin-left: 260px; /* Abre espaço para a sidebar */
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* --- 2. CARD PRINCIPAL --- */
+.relatorio-card {
+    background-color: var(--cor-fundo-card);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--cor-sombra);
+    padding: 40px;
+    max-width: 700px;
+    margin: 50px auto;
+}
+
+.relatorio-card h1 {
+    font-size: 28px;
+    color: var(--cor-texto-primaria);
+    border-bottom: 2px solid var(--cor-borda-clara);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.paciente-nome {
+    font-size: 16px;
+    color: var(--cor-texto-secundaria);
+    margin-bottom: 20px;
+}
+.paciente-nome strong {
+    color: var(--cor-texto-primaria);
+}
+
+/* Caixa de Aviso */
+.warning-box {
+    background-color: var(--cor-fundo-card-secundario);
+    border-left: 5px solid var(--cor-btn-warning);
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.warning-box i {
+    color: var(--cor-btn-warning);
+    font-size: 24px;
+    flex-shrink: 0;
+}
+.warning-box p {
+    font-size: 14px;
+    color: var(--cor-texto-primaria);
+}
+
+/* Detalhes do Método */
+.relatorio-metodo h2 {
+    font-size: 20px;
+    color: var(--cor-texto-primaria);
+    margin-bottom: 15px;
+}
+.relatorio-metodo ul {
+    list-style: none;
+    padding-left: 0;
+}
+.relatorio-metodo ul li {
+    font-size: 16px;
+    color: var(--cor-texto-secundaria);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.relatorio-metodo ul li i {
+    color: var(--cor-gradiente-texto);
+}
+
+/* --- 3. BOTÕES DE AÇÃO --- */
+.relatorio-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    border-top: 1px solid var(--cor-borda-clara);
+    padding-top: 20px;
+}
+.btn-crud {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+}
+
+.btn-voltar {
+    background-color: var(--cor-btn-neutro);
+    color: var(--cor-btn-neutro-texto);
+}
+.btn-voltar:hover {
+    background-color: var(--cor-btn-neutro-hover);
+}
+
+.btn-gerar {
+    background: linear-gradient(to right, var(--cor-btn-success), var(--cor-btn-edit));
+    color: var(--cor-texto-sobre-gradiente);
+}
+.btn-gerar:hover {
+    opacity: 0.9;
+}
+
+
+/* --- 4. LAYOUT MOBILE --- */
+.mobile-header {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--cor-fundo-sidebar);
+    color: var(--cor-texto-primaria);
+    align-items: center;
+    padding: 0 15px;
+    z-index: 900;
+    box-shadow: 0 2px 5px var(--cor-sombra);
+}
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; }
+.mobile-logo { height: 40px; }
+.mobile-logo img { height: 100%; width: auto; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+    .main-content {
+        margin-left: 0;
+        padding-top: 75px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .relatorio-card {
+        padding: 20px;
+        margin: 20px auto;
+    }
+    .relatorio-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .btn-crud {
+        justify-content: center;
+    }
+}

@@ -27,7 +27,7 @@ if (isset($_POST['login']) && isset($_POST['senha'])) {
             $_SESSION['perfil'] = 'usuario'; // Define o perfil
 
             // Redireciona para o dashboard do usuário
-            header("Location: dashboard_usuario.php");
+            header("Location: ./paginas/dashboard-usuario.php");
             exit();
         }
 

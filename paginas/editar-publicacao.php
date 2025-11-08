@@ -51,7 +51,8 @@ if (!empty($pub['Imagem'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Publicação - Firme Apoio</title>
-    
+
+    <link rel="stylesheet" href="../assets/css/tema.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/cadastro-publicacao.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -158,6 +159,7 @@ if (!empty($pub['Imagem'])) {
 
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/cadastrar-publicacao.js"></script>
+    <script src="../assets/js/contraste.js"></script>
 
 </body>
 </html>

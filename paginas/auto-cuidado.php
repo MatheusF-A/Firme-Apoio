@@ -20,7 +20,8 @@ $paginaAtiva = 'auto-cuidado';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Cuidado - Firme Apoio</title>
-    
+
+    <link rel="stylesheet" href="../assets/css/tema.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/auto-cuidado.css"> <!-- CSS desta página -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -104,6 +105,7 @@ $paginaAtiva = 'auto-cuidado';
 
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/auto-cuidado.js"></script> 
+    <script src="../assets/js/contraste.js"></script>
 
 </body>
 </html>

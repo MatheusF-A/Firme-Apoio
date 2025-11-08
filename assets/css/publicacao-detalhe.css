@@ -7,8 +7,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    background-color: var(--cor-fundo-pagina); /* Refatorado */
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
     min-height: 100vh;
 }
 
@@ -29,7 +29,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #555;
+    color: var(--cor-texto-secundaria); /* Refatorado */
     text-decoration: none;
     font-weight: 600;
     margin-bottom: 20px;
@@ -38,7 +38,7 @@ body {
     transition: background-color 0.2s;
 }
 .btn-voltar-pub:hover {
-    background-color: #e0e0e0;
+    background-color: var(--cor-btn-neutro); /* Refatorado */
 }
 .btn-voltar-pub i {
     font-size: 14px;
@@ -46,46 +46,46 @@ body {
 
 /* Mensagem de Erro */
 .pub-erro {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-card); /* Refatorado */
     border-radius: 8px;
     padding: 30px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
 }
 .pub-erro h2 {
-    color: #e74c3c;
+    color: var(--cor-btn-danger); /* Refatorado */
     margin-bottom: 10px;
 }
 
 /* Container do Artigo */
 .publicacao-content {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-card); /* Refatorado */
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
     overflow: hidden; /* Garante que a imagem não vaze */
 }
 
 /* Cabeçalho (Título, Subtítulo, Autor) */
 .pub-header {
     padding: 30px 40px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--cor-fundo-input); /* Refatorado (Aproximação) */
 }
 .pub-header h1 {
     font-size: 2.2rem;
     font-weight: bold;
-    color: #2c3a47;
+    color: var(--cor-texto-primaria); /* Refatorado */
     margin-bottom: 10px;
     line-height: 1.2;
 }
 .pub-header .subtitle {
     font-size: 1.2rem;
-    color: #555;
+    color: var(--cor-texto-secundaria); /* Refatorado */
     margin-bottom: 15px;
     font-style: italic;
 }
 .pub-header .author {
     font-size: 0.9rem;
-    color: #777;
+    color: var(--cor-texto-terciaria); /* Refatorado */
 }
 
 /* Imagem Principal (Hero) */
@@ -93,7 +93,7 @@ body {
     width: 100%;
     max-height: 400px; /* Limita a altura da imagem */
     overflow: hidden;
-    background-color: #f0f0f0;
+    background-color: var(--cor-fundo-input); /* Refatorado */
 }
 .pub-hero-image img {
     width: 100%;
@@ -106,7 +106,7 @@ body {
     padding: 30px 40px 40px 40px;
     font-size: 1.1rem; /* Tamanho bom para leitura */
     line-height: 1.7; /* Espaçamento entre linhas */
-    color: #333;
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
 }
 .pub-body p {
     margin-bottom: 1.5rem;
@@ -114,11 +114,11 @@ body {
 .pub-body .pub-link {
     margin-top: 30px;
     padding-top: 20px;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid var(--cor-fundo-input); /* Refatorado (Aproximação) */
     font-size: 0.9rem;
 }
 .pub-body .pub-link a {
-    color: #4089a4;
+    color: var(--cor-texto-link); /* Refatorado */
     word-break: break-all;
 }
 
@@ -131,17 +131,17 @@ body {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: #ffffff;
-    color: #2c3a47;
+    background-color: var(--cor-fundo-sidebar); /* Refatorado */
+    color: var(--cor-texto-primaria); /* Refatorado */
     align-items: center;
     padding: 0 15px;
     z-index: 900;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--cor-sombra); /* Refatorado (Aproximação) */
 }
-.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; } /* Refatorado */
 .mobile-logo { height: 40px; }
 .mobile-logo img { height: 100%; width: auto; }
-.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; } /* Mantido */
 
 @media (max-width: 768px) {
     .mobile-header {

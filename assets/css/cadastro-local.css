@@ -6,8 +6,8 @@
 }
 
 .content-header {
-    background: linear-gradient(to right, #54b36c, #4089a4);
-    color: white;
+    background: var(--cor-gradiente-primario); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
     padding: 15px 25px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -18,6 +18,7 @@
 }
 
 /* --- Caixas de Alerta (Sucesso/Erro) --- */
+/* Mantido original, pois não há variáveis de alerta no tema.css */
 .alert-message {
     padding: 15px 20px;
     border-radius: 8px;
@@ -48,9 +49,9 @@
 }
 
 .form-container {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-card); /* Refatorado */
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
     padding: 30px;
 }
 
@@ -75,30 +76,30 @@
 .imagem-preview {
     width: 200px;
     height: 200px;
-    border: 2px dashed #e0e0e0;
+    border: 2px dashed var(--cor-borda-clara); /* Refatorado */
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f9f9f9;
+    background-color: var(--cor-fundo-card-secundario); /* Refatorado */
     background-size: cover;
     background-position: center;
     transition: background-color 0.2s;
 }
 
 .imagem-preview:hover {
-    background-color: #f0f0f0;
+    background-color: var(--cor-fundo-input); /* Refatorado */
 }
 
 .imagem-preview .default-icon {
     font-size: 48px;
-    color: #cccccc;
+    color: var(--cor-btn-neutro-hover); /* Refatorado (Aproximação) */
 }
 
 .imagem-preview-text {
     font-size: 14px;
-    color: #aaa;
+    color: var(--cor-borda-escura); /* Refatorado (Aproximação) */
     margin-top: 10px;
     font-weight: 600;
 }
@@ -119,7 +120,7 @@ label {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 8px;
-    color: #333;
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
 }
 
 input[type="text"],
@@ -128,8 +129,8 @@ input[type="email"],
 textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #e0e0e0;
-    background-color: #ffffff;
+    border: 1px solid var(--cor-borda-clara); /* Refatorado */
+    background-color: var(--cor-fundo-card); /* Refatorado (Baseado no #ffffff) */
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 14px;
@@ -177,23 +178,23 @@ textarea {
 }
 
 .btn-voltar {
-    background-color: #e74c3c; /* Vermelho */
-    color: white;
+    background-color: var(--cor-btn-danger); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
 }
 .btn-voltar:hover {
-    background-color: #c0392b;
+    background-color: var(--cor-btn-danger-hover); /* Refatorado */
 }
 
 .btn-enviar {
-    background-color: #3498db; /* Azul */
-    color: white;
+    background-color: var(--cor-btn-edit); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
 }
 .btn-enviar:hover {
-    background-color: #2980b9;
+    background-color: var(--cor-btn-edit-hover); /* Refatorado */
 }
 
 .btn-enviar:disabled {
-    background-color: #95a5a6;
+    background-color: #95a5a6; /* Mantido (sem variável correspondente) */
     cursor: not-allowed;
 }
 
@@ -206,17 +207,17 @@ textarea {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: #ffffff;
-    color: #2c3a47;
+    background-color: var(--cor-fundo-sidebar); /* Refatorado */
+    color: var(--cor-texto-primaria); /* Refatorado */
     align-items: center;
     padding: 0 15px;
     z-index: 900;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--cor-sombra); /* Refatorado (Aproximação) */
 }
-.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; } /* Refatorado */
 .mobile-logo { height: 40px; }
 .mobile-logo img { height: 100%; width: auto; }
-.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; } /* Mantido */
 
 /* --- Responsividade --- */
 @media (max-width: 992px) {

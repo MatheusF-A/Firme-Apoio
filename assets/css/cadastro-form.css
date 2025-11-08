@@ -7,8 +7,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #333;
+    background-color: var(--cor-fundo-pagina); /* CORRIGIDO */
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,7 +56,7 @@ label {
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #444;
+    color: var(--cor-texto-secundaria); /* Refatorado (Aproximação de #444) */
 }
 
 input[type="text"],
@@ -66,20 +66,20 @@ input[type="tel"],
 input[type="date"] {
     width: 100%;
     padding: 12px;
-    border: 1px solid #e0e0e0;
-    background-color: #f4f4f4;
+    border: 1px solid var(--cor-borda-clara); /* Refatorado */
+    background-color: var(--cor-fundo-input); /* Refatorado (Aproximação de #f4f4f4) */
     border-radius: 8px;
     margin-bottom: 10px;
     font-size: 14px;
 }
 
 input[type="date"] {
-    color: #555;
+    color: var(--cor-texto-secundaria); /* Refatorado */
 }
 
 small {
     font-size: 11px;
-    color: #777;
+    color: var(--cor-texto-terciaria); /* Refatorado */
     margin-top: -8px;
     margin-bottom: 10px;
 }
@@ -101,13 +101,13 @@ small {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #888;
+    color: var(--cor-texto-placeholder); /* Refatorado (Aproximação de #888) */
 }
 
 /* Mensagens de Erro */
 .senha-erro {
     font-size: 12px;
-    color: #d93025;
+    color: #d93025; /* Mantido (cor de erro específica) */
     height: 15px;
     margin-top: -5px;
     margin-bottom: 5px;
@@ -118,7 +118,7 @@ small {
     display: block;
     font-size: 12px;
     text-decoration: none;
-    color: #007bff;
+    color: #007bff; /* Mantido (cor de link específica) */
     margin-bottom: 30px;
     text-align: center;
 }
@@ -129,8 +129,8 @@ small {
 
 /* Botão de Cadastro */
 button[type="submit"] {
-    background: linear-gradient(to right, #54b36c, #4089a4);
-    color: white;
+    background: var(--cor-gradiente-primario); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
     border: none;
     padding: 14px;
     border-radius: 8px;
@@ -145,11 +145,12 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
+    /* Mantido original, pois não há variável de gradiente-hover no tema.css */
     background: linear-gradient(to right, #4a9f60, #346f86);
 }
 
 button[type="submit"]:disabled {
-    background: #cccccc;
+    background: var(--cor-btn-neutro-hover); /* Refatorado (Baseado no #cccccc) */
     cursor: not-allowed;
 }
 

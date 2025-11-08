@@ -22,9 +22,9 @@
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
-    color: #555;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
+    color: var(--cor-texto-secundaria); /* Refatorado */
+    background-color: var(--cor-fundo-card); /* Refatorado */
+    border: 1px solid var(--cor-borda-clara); /* Refatorado */
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
@@ -33,31 +33,31 @@
 }
 
 .tab-link:hover {
-    background-color: #f9f9f9;
-    color: #000;
+    background-color: var(--cor-fundo-card-secundario); /* Refatorado */
+    color: var(--cor-texto-primaria); /* Refatorado (Aproximação de #000) */
 }
 
 .tab-link.active {
-    background: linear-gradient(to right, #54b36c, #4089a4);
-    color: #ffffff;
-    border-color: #4089a4;
+    background: var(--cor-gradiente-primario); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
+    border-color: var(--cor-texto-link); /* Refatorado (Aproximação) */
 }
 .tab-link.active i {
-    color: #ffffff;
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
 }
 
 /* --- Container da Avaliação --- */
 .avaliacao-container {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-card); /* Refatorado */
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
     padding: 30px;
 }
 
 .avaliacao-container h2 {
     font-size: 24px;
     font-weight: 600;
-    color: #2c3a47;
+    color: var(--cor-texto-primaria); /* Refatorado */
     margin-bottom: 20px;
 }
 .avaliacao-container h2:first-of-type {
@@ -69,7 +69,7 @@
     display: flex;
     justify-content: space-around;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: var(--cor-fundo-card-secundario); /* Refatorado */
     border-radius: 8px;
     margin-bottom: 30px;
 }
@@ -98,7 +98,7 @@
     transform: scale(1.3);
     filter: grayscale(0%);
     opacity: 1;
-    text-shadow: 0 0 15px rgba(255, 200, 0, 0.7); 
+    text-shadow: 0 0 15px rgba(255, 200, 0, 0.7); /* Mantido, sem variável */
 }
 
 /* --- Formulário de Perguntas --- */
@@ -109,14 +109,14 @@
 .form-group label {
     font-size: 18px;
     font-weight: 600;
-    color: #333;
+    color: var(--cor-btn-neutro-texto); /* Refatorado (Baseado no #333) */
     display: block;
     margin-bottom: 5px;
 }
 
 .form-group small {
     font-size: 13px;
-    color: #777;
+    color: var(--cor-texto-terciaria); /* Refatorado */
     display: block;
     margin-bottom: 10px;
     font-style: italic;
@@ -125,8 +125,8 @@
 .form-group textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #e0e0e0;
-    background-color: #ffffff;
+    border: 1px solid var(--cor-borda-clara); /* Refatorado */
+    background-color: var(--cor-fundo-card); /* Refatorado */
     border-radius: 8px;
     font-size: 14px;
     box-sizing: border-box; 
@@ -147,8 +147,8 @@
     justify-content: center;
     gap: 8px;
     transition: background-color 0.2s;
-    background: linear-gradient(to right, #54b36c, #4089a4);
-    color: white;
+    background: var(--cor-gradiente-primario); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
     min-width: 150px;
 }
 
@@ -157,7 +157,7 @@
 }
 
 .btn-enviar:disabled {
-    background: #95a5a6;
+    background: #95a5a6; /* Mantido, sem variável */
     cursor: not-allowed;
 }
 
@@ -169,17 +169,17 @@
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: #ffffff;
-    color: #2c3a47;
+    background-color: var(--cor-fundo-sidebar); /* Refatorado */
+    color: var(--cor-texto-primaria); /* Refatorado */
     align-items: center;
     padding: 0 15px;
     z-index: 900;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--cor-sombra); /* Refatorado */
 }
-.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; } /* Refatorado */
 .mobile-logo { height: 40px; }
 .mobile-logo img { height: 100%; width: auto; }
-.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; } /* Mantido, sem variável */
 /* ----> FIM DA ADIÇÃO <---- */
 
 

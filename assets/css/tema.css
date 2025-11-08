@@ -1,0 +1,87 @@
+/* * DICIONÁRIO DE CORES (VARIÁVEIS CSS) DO PROJETO
+ * Este arquivo define a paleta de cores para os dois temas.
+ */
+
+:root {
+    /* --- TEMA PADRÃO (CLARO) --- */
+
+    /* Fundos */
+    --cor-fundo-pagina: #f4f7f6;
+    --cor-fundo-sidebar: #ffffff;
+    --cor-fundo-card: #ffffff;
+    --cor-fundo-card-secundario: #f9f9f9;
+    --cor-fundo-input: #f0f0f0;
+
+    /* Textos */
+    --cor-texto-primaria: #2c3a47; /* Títulos escuros */
+    --cor-texto-secundaria: #555;   /* Texto de corpo */
+    --cor-texto-terciaria: #777;   /* Texto (ex: autor) */
+    --cor-texto-link: #4089a4;
+    --cor-texto-sobre-gradiente: #ffffff;
+    --cor-texto-placeholder: #999;
+
+    /* Bordas */
+    --cor-borda-clara: #e0e0e0;
+    --cor-borda-escura: #6c757d;
+    --cor-sombra: rgba(0, 0, 0, 0.08);
+
+    /* Cores de Ação (Gradientes) */
+    --cor-gradiente-primario: linear-gradient(to right, #54b36c, #4089a4);
+    --cor-gradiente-texto: #54b36c; /* Cor sólida para ícones */
+
+    /* Cores de Botões */
+    --cor-btn-danger: #e74c3c;
+    --cor-btn-danger-hover: #c0392b;
+    --cor-btn-success: #54b36c;
+    --cor-btn-success-hover: #4a9f60;
+    --cor-btn-warning: #f39c12;
+    --cor-btn-warning-hover: #e67e22;
+    --cor-btn-edit: #3498db;
+    --cor-btn-edit-hover: #2980b9;
+    --cor-btn-neutro: #e0e0e0;
+    --cor-btn-neutro-hover: #cccccc;
+    --cor-btn-neutro-texto: #333;
+}
+
+
+/* * SOBRESCREVE AS VARIÁVEIS QUANDO O MODO DE ALTO CONTRASTE ESTÁ ATIVO
+ * (Baseado na imagem image_ada966.png)
+ */
+body.high-contrast {
+    /* Fundos */
+    --cor-fundo-pagina: #000000;
+    --cor-fundo-sidebar: #111111;
+    --cor-fundo-card: #111111;
+    --cor-fundo-card-secundario: #222222;
+    --cor-fundo-input: #333333;
+
+    /* Textos */
+    --cor-texto-primaria: #FFFFFF;
+    --cor-texto-secundaria: #FFFFFF;
+    --cor-texto-terciaria: #CCCCCC;
+    --cor-texto-link: #FFFF00; /* Amarelo */
+    --cor-texto-sobre-gradiente: #000000;
+    --cor-texto-placeholder: #888;
+
+    /* Bordas */
+    --cor-borda-clara: #444444;
+    --cor-borda-escura: #AAAAAA;
+    --cor-sombra: rgba(255, 255, 255, 0.1);
+
+    /* Cores de Ação (Amarelo Sólido) */
+    --cor-gradiente-primario: #FFFF00; /* Amarelo */
+    --cor-gradiente-texto: #FFFF00;
+
+    /* Cores de Botões */
+    --cor-btn-danger: #FF4136; /* Vermelho Claro */
+    --cor-btn-danger-hover: #FF6347;
+    --cor-btn-success: #2ECC40; /* Verde Claro */
+    --cor-btn-success-hover: #3D9970;
+    --cor-btn-warning: #FFDC00; /* Amarelo */
+    --cor-btn-warning-hover: #FFBF00;
+    --cor-btn-edit: #0074D9; /* Azul Claro */
+    --cor-btn-edit-hover: #39CCCC;
+    --cor-btn-neutro: #555555;
+    --cor-btn-neutro-hover: #777777;
+    --cor-btn-neutro-texto: #FFFFFF;
+}

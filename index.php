@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Firme Apoio</title>
+
+    <link rel="stylesheet" href="assets/css/tema.css">
     <link rel="stylesheet" href="assets/css/login.css">
+
 </head>
 <body>
     <div class="login-container">
@@ -31,9 +34,11 @@
 
     <div class="contrast-toggle">
         <button id="toggle-contrast" title="Alternar Contraste">
-            <img src="assets/img/contrast.png" alt="Ícone de Contraste">
+            <img src="assets/img/contrast.png" alt="Ícone de Contraste" id="contrast-icon-img">
         </button>
     </div>
+
+    <script src="assets/js/contrastelogin.js"></script>
 
 </body>
 </html>

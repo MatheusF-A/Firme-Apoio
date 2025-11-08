@@ -7,8 +7,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    background-color: var(--cor-fundo-pagina); /* Refatorado */
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
     min-height: 100vh;
 }
 
@@ -20,8 +20,8 @@ body {
 
 /* Header de "Central de Conteúdos" */
 .content-header {
-    background: linear-gradient(to right, #54b36c, #4089a4);
-    color: white;
+    background: var(--cor-gradiente-primario); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
     padding: 25px 30px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -48,44 +48,44 @@ body {
 
 /* Estilo do Card Individual */
 .choice-card {
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-card); /* Refatorado */
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
     padding: 25px;
     text-decoration: none;
-    color: #333;
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border-left: 4px solid #4089a4; /* Borda azul padrão */
+    border-left: 4px solid var(--cor-texto-link); /* Refatorado (Aproximação) */
 }
 
 .choice-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px var(--cor-sombra); /* Refatorado (Aproximação) */
 }
 
 /* Estilo do Card de Gerenciamento (Voluntário) */
 .choice-card.card-manage {
-    background-color: #fffaf0; /* Fundo levemente amarelado */
-    border-left: 4px solid #f39c12; /* Borda laranja */
+    background-color: var(--cor-fundo-card-secundario); /* CORRIGIDO */
+    border-left: 4px solid var(--cor-btn-warning);
 }
 .choice-card.card-manage .card-icon {
-    color: #f39c12;
-    background-color: #fffaf0;
+    color: var(--cor-btn-warning);
+    background-color: var(--cor-fundo-card-secundario); /* CORRIGIDO */
 }
 
 
 .card-icon {
     font-size: 28px;
-    color: #4089a4; /* Cor do gradiente */
+    color: var(--cor-texto-link); /* Refatorado (Aproximação) */
     margin-bottom: 15px;
     width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f0f8ff;
+    background-color: #f0f8ff; /* Mantido (cor de destaque específica) */
     border-radius: 50%;
 }
 
@@ -93,13 +93,13 @@ body {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
-    color: #2c3a47;
+    color: var(--cor-texto-primaria); /* Refatorado */
 }
 
 .choice-card p {
     font-size: 14px;
     line-height: 1.5;
-    color: #555;
+    color: var(--cor-texto-secundaria); /* Refatorado */
     flex-grow: 1; /* Garante que os cards tenham a mesma altura */
 }
 
@@ -111,17 +111,17 @@ body {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: #ffffff;
-    color: #2c3a47;
+    background-color: var(--cor-fundo-sidebar); /* Refatorado */
+    color: var(--cor-texto-primaria); /* Refatorado */
     align-items: center;
     padding: 0 15px;
     z-index: 900;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--cor-sombra); /* Refatorado (Aproximação) */
 }
-.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; } /* Refatorado */
 .mobile-logo { height: 40px; }
 .mobile-logo img { height: 100%; width: auto; }
-.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; } /* Mantido */
 
 /* --- Responsividade --- */
 

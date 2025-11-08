@@ -7,8 +7,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    background-color: var(--cor-fundo-pagina); /* Refatorado */
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
     min-height: 100vh;
 }
 
@@ -37,9 +37,9 @@ body {
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
-    color: #555;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
+    color: var(--cor-texto-secundaria); /* Refatorado */
+    background-color: var(--cor-fundo-card); /* Refatorado */
+    border: 1px solid var(--cor-borda-clara); /* Refatorado */
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
@@ -47,16 +47,16 @@ body {
     transition: all 0.2s ease;
 }
 .tab-link:hover {
-    background-color: #f9f9f9;
-    color: #000;
+    background-color: var(--cor-fundo-card-secundario); /* Refatorado */
+    color: var(--cor-texto-primaria); /* Refatorado (Aproximação) */
 }
 .tab-link.active {
-    background: linear-gradient(to right, #54b36c, #4089a4);
-    color: #ffffff;
-    border-color: #4089a4;
+    background: var(--cor-gradiente-primario); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
+    border-color: var(--cor-texto-link); /* Refatorado (Aproximação) */
 }
 .tab-link.active i {
-    color: #ffffff;
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
 }
 
 /* NOVO: Botão "Cadastrar Vídeo" */
@@ -72,8 +72,8 @@ body {
     align-items: center;
     gap: 8px;
     transition: background-color 0.2s;
-    background: linear-gradient(to right, #54b36c, #4089a4);
-    color: white;
+    background: var(--cor-gradiente-primario); /* Refatorado */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
     flex-shrink: 0; /* Impede que o botão encolha */
 }
 .btn-novo-item:hover {
@@ -81,6 +81,7 @@ body {
 }
 
 /* NOVO: Caixas de Alerta (Sucesso/Erro) */
+/* Mantido original, pois não há variáveis de alerta no tema.css */
 .alert-message {
     padding: 15px 20px;
     border-radius: 8px;
@@ -114,15 +115,15 @@ body {
 
 .video-card {
     position: relative; /* ADICIONADO: Para o botão de deletar */
-    background-color: #ffffff;
+    background-color: var(--cor-fundo-card); /* Refatorado */
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
     overflow: hidden; 
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .video-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px var(--cor-sombra); /* Refatorado (Aproximação) */
 }
 
 /* NOVO: Botão Deletar (Ícone) */
@@ -136,8 +137,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(231, 76, 60, 0.9); /* Vermelho */
-    color: white;
+    background-color: var(--cor-btn-danger); /* Refatorado (de rgba) */
+    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -145,7 +146,7 @@ body {
     transition: all 0.2s ease;
 }
 .btn-deletar-item:hover {
-    background-color: #c0392b;
+    background-color: var(--cor-btn-danger-hover); /* Refatorado */
     transform: scale(1.1);
 }
 .btn-deletar-item i {
@@ -158,7 +159,7 @@ body {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9; 
-    background-color: #000;
+    background-color: #000; /* Mantido (cor específica de player) */
 }
 .video-player-wrapper iframe {
     width: 100%;
@@ -174,7 +175,7 @@ body {
 .video-details h3 {
     font-size: 16px; 
     font-weight: 600;
-    color: #2c3a47;
+    color: var(--cor-texto-primaria); /* Refatorado */
     margin-bottom: 15px;
 }
 .video-meta {
@@ -182,7 +183,7 @@ body {
     flex-direction: column;
     gap: 8px;
     font-size: 13px;
-    color: #555;
+    color: var(--cor-texto-secundaria); /* Refatorado */
 }
 .video-meta span {
     display: flex;
@@ -190,10 +191,10 @@ body {
     gap: 6px;
 }
 .video-meta i.fa-youtube {
-    color: #FF0000;
+    color: #FF0000; /* Mantido (cor específica da marca) */
 }
 .video-meta a {
-    color: #555;
+    color: var(--cor-texto-secundaria); /* Refatorado */
     text-decoration: none;
     font-weight: 600;
 }
@@ -209,17 +210,17 @@ body {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: #ffffff;
-    color: #2c3a47;
+    background-color: var(--cor-fundo-sidebar); /* Refatorado */
+    color: var(--cor-texto-primaria); /* Refatorado */
     align-items: center;
     padding: 0 15px;
     z-index: 900;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px var(--cor-sombra); /* Refatorado (Aproximação) */
 }
-.hamburger-btn { background: none; border: none; color: #2c3a47; font-size: 24px; cursor: pointer; margin-right: 15px; }
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; } /* Refatorado */
 .mobile-logo { height: 40px; }
 .mobile-logo img { height: 100%; width: auto; }
-.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; } /* Mantido */
 
 @media (max-width: 992px) {
     .video-grid {

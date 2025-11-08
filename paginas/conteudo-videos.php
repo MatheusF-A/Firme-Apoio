@@ -45,7 +45,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conteúdos - Vídeos - Firme Apoio</title>
-    
+
+    <link rel="stylesheet" href="../assets/css/tema.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/conteudo-videos.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -68,10 +69,10 @@ try {
                 <a href="conteudo-publicacao.php" class="tab-link">
                     <i class="fas fa-book-open"></i> Publicações
                 </a>
-                <a href="conteudos-videos.php" class="tab-link active">
+                <a href="conteudo-videos.php" class="tab-link active">
                     <i class="fas fa-video"></i> Vídeos
                 </a>
-                <a href="gerenciar-depoimentos.php" class="tab-link">
+                <a href="conteudo-depoimento.php" class="tab-link">
                     <i class="fas fa-comment-dots"></i> Depoimentos
                 </a>
             </nav>
@@ -135,6 +136,7 @@ try {
 
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/conteudo-videos.js"></script>
+    <script src="../assets/js/contraste.js"></script>
 
 </body>
 </html>

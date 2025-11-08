@@ -14,7 +14,7 @@ $perfil = $_SESSION['perfil'] ?? 'usuario';
 
 // 2. Define o link de "Início"
 // (Volta ao dashboard de cards para o voluntário)
-$linkInicio = ($perfil === 'voluntario') ? 'dashboard_voluntario.php' : 'dashboard_usuario.php';
+$linkInicio = ($perfil === 'voluntario') ? 'dashboard-voluntario.php' : 'dashboard-usuario.php';
 
 // 3. Define o link de "Auto Cuidado" (que vira "Acompanhamento" para voluntários)
 $linkAutoCuidado = ($perfil === 'voluntario') ? 'acompanhamento.php' : 'auto-cuidado.php';
@@ -57,7 +57,7 @@ $linkAutoCuidado = ($perfil === 'voluntario') ? 'acompanhamento.php' : 'auto-cui
         <hr class="footer-divider">
         
         <div class="contrast-toggle">
-            <img src="../assets/img/contrast.png" alt="Ícone de contraste" class="contrast-icon">
+            <img src="../assets/img/contrast.png" alt="Ícone de contraste" class="contrast-icon" id="contrast-icon-img">
             <span class="contrast-label">Alto Contraste</span>
             <label class="switch-toggle" for="contrast-toggle-checkbox">
                 <input type="checkbox" id="contrast-toggle-checkbox">

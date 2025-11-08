@@ -50,8 +50,8 @@ if (!empty($local['imagem'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Local de Apoio - Firme Apoio</title>
     
+    <link rel="stylesheet" href="../assets/css/tema.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
-    <!-- Reutilizando o CSS da página de cadastro -->
     <link rel="stylesheet" href="../assets/css/cadastro-local.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -148,7 +148,8 @@ if (!empty($local['imagem'])) {
     </main>
 
     <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/cadastro-local.js"></script> 
+    <script src="../assets/js/cadastro-local.js"></script>
+    <script src="../assets/js/contraste.js"></script>
 
 </body>
 </html>

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Voluntário - Firme Apoio</title>
+
+    <link rel="stylesheet" href="../assets/css/tema.css">
     <link rel="stylesheet" href="../assets/css/cadastro-form.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -45,19 +47,21 @@
                     <input type="date" id="dtNascimento" name="dtNascimento" required> </div>
             </div>
 
-            <a href="./login.php" class="login-link">Já possui uma conta? Faça Login aqui!</a>
+            <a href="../index.php" class="login-link">Já possui uma conta? Faça Login aqui!</a>
 
             <button type="submit" id="submit-btn">CADASTRAR-SE</button>
         </form>
     </div>
 
     <div class="contrast-toggle">
-        <button>
-            <img src="../assets/img/contrast.png" alt="Toggle Contrast">
+        <button id="toggle-contrast" title="Alternar Contraste">
+            <img src="../assets/img/contrast.png" alt="Ícone de Contraste" id="contrast-icon-img-alt">
         </button>
     </div>
 
+    <script src="../assets/js/contrastelogin.js"></script>
     <script src="../assets/js/cadastro-form.js" defer></script>
+
 
 </body>
 </html>

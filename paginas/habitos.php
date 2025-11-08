@@ -43,7 +43,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Hábitos - Firme Apoio</title>
-    
+
+    <link rel="stylesheet" href="../assets/css/tema.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/auto-cuidado.css"> 
     <link rel="stylesheet" href="../assets/css/habitos.css"> 
@@ -205,6 +206,8 @@ try {
         </div>
     </div>
     <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/habitos-modal.js"></script> <!-- SCRIPT ATUALIZADO -->
+    <script src="../assets/js/habitos-modal.js"></script>
+    <script src="../assets/js/contraste.js"></script>
+    
 </body>
 </html>

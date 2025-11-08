@@ -18,18 +18,11 @@ body {
     overflow-y: auto;
 }
 
-/* --- 2. ABAS DE NAVEGAÇÃO E HEADER --- */
-.conteudos-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 30px;
-}
-
+/* --- 2. ABAS DE NAVEGAÇÃO --- */
 .autocuidado-tabs {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap; 
+    margin-bottom: 30px;
 }
 .tab-link {
     padding: 12px 25px;
@@ -58,30 +51,26 @@ body {
     color: var(--cor-texto-sobre-gradiente); /* Refatorado */
 }
 
-/* Botão "Gerenciar" (para Voluntário) */
-.btn-novo-item {
-    padding: 12px 20px;
-    border: none;
+/* Header da Moderação */
+/* Mantido original, pois são cores de alerta/destaque específicas */
+.content-header-admin {
+    background-color: #fffaf0;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 20px 25px;
     border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.2s;
-    background: var(--cor-gradiente-primario); /* Refatorado */
-    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
-    flex-shrink: 0; 
+    margin-bottom: 30px;
 }
-.btn-novo-item:hover {
-    /* Mantido original, pois não há variável de gradiente-hover no tema.css */
-    background-color: linear-gradient(to right, #3f804f, #2e6274);
+.content-header-admin h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.content-header-admin p {
+    font-size: 16px;
 }
 
-/* ----> NOVOS ESTILOS DE ALERTA <---- */
-/* Mantido original, pois não há variáveis de alerta no tema.css */
+/* --- 3. CAIXAS DE ALERTA --- */
+/* Mantido original, pois são cores de alerta específicas */
 .alert-message {
     padding: 15px 20px;
     border-radius: 8px;
@@ -105,69 +94,62 @@ body {
     font-size: 20px;
 }
 
-/* --- 3. LISTA DE PUBLICAÇÕES --- */
-.pub-list {
+/* --- 4. LISTA DE DEPOIMENTOS PENDENTES --- */
+.depoimento-list-admin {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.pub-card {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.depoimento-vazio {
+    text-align: center;
+    font-size: 16px;
+    color: var(--cor-texto-terciaria); /* Refatorado */
+    padding: 40px 0;
+}
+
+.depoimento-card-admin {
     background-color: var(--cor-fundo-card); /* Refatorado */
-    border-radius: 12px;
-    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
-    padding: 20px;
-}
-
-/* Imagem */
-.pub-image {
-    width: 200px;
-    height: 120px;
-    flex-shrink: 0;
     border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--cor-fundo-input); /* Refatorado */
-}
-.pub-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; 
+    box-shadow: 0 2px 8px var(--cor-sombra); /* Refatorado */
 }
 
-/* Detalhes (Texto) */
-.pub-details {
-    flex-grow: 1;
+.depoimento-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cor-texto-secundaria); /* Refatorado */
+    padding: 10px 20px;
+    background-color: var(--cor-fundo-card-secundario); /* Refatorado */
+    border-bottom: 1px solid var(--cor-fundo-input); /* Refatorado (Aproximação) */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
-.pub-details h3 {
+
+.depoimento-body {
+    padding: 20px 25px 25px 25px;
+}
+.depoimento-body h3 {
     font-size: 20px;
     font-weight: 600;
     color: var(--cor-texto-primaria); /* Refatorado */
-    margin-bottom: 5px;
-}
-.pub-details .subtitle {
-    font-size: 14px;
-    color: var(--cor-texto-secundaria); /* Refatorado */
     margin-bottom: 10px;
 }
-.pub-details .author {
-    font-size: 13px;
-    color: var(--cor-texto-terciaria); /* Refatorado */
-    font-style: italic;
+.depoimento-body p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--cor-btn-neutro-texto); /* Refatorado */
 }
 
-/* ----> NOVOS BOTÕES DE ADMIN <---- */
-.pub-admin-actions {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid var(--cor-fundo-input); /* Refatorado (Aproximação) */
+/* Botões de Aprovar/Deletar */
+.admin-actions {
     display: flex;
+    justify-content: flex-end;
     gap: 10px;
+    padding: 0 25px 20px 25px;
+    border-top: 1px solid var(--cor-fundo-input); /* Refatorado (Aproximação) */
 }
 .btn-crud {
-    padding: 8px 15px;
+    padding: 8px 20px;
     border: none;
     border-radius: 8px;
     font-size: 14px;
@@ -179,12 +161,12 @@ body {
     gap: 8px;
     transition: background-color 0.2s;
 }
-.btn-editar {
-    background-color: var(--cor-btn-edit); /* Refatorado */
+.btn-aprovar {
+    background-color: var(--cor-btn-success); /* Refatorado */
     color: var(--cor-texto-sobre-gradiente); /* Refatorado */
 }
-.btn-editar:hover {
-    background-color: var(--cor-btn-edit-hover); /* Refatorado */
+.btn-aprovar:hover {
+    background-color: var(--cor-btn-success-hover); /* Refatorado */
 }
 .btn-deletar {
     background-color: var(--cor-btn-danger); /* Refatorado */
@@ -195,26 +177,7 @@ body {
 }
 
 
-/* Botão "Acessar" */
-.btn-acessar {
-    margin-left: auto; /* Empurra para a direita */
-    flex-shrink: 0;
-    padding: 10px 25px;
-    background: var(--cor-gradiente-primario); /* Refatorado */
-    color: var(--cor-texto-sobre-gradiente); /* Refatorado */
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    transition: opacity 0.2s ease;
-    align-self: center; /* Alinha o botão "Acessar" */
-}
-.btn-acessar:hover {
-    opacity: 0.9;
-}
-
-
-/* --- 4. LAYOUT MOBILE --- */
+/* --- 5. LAYOUT MOBILE --- */
 .mobile-header {
     display: none; 
     position: fixed;
@@ -227,7 +190,7 @@ body {
     align-items: center;
     padding: 0 15px;
     z-index: 900;
-    box-shadow: 0 2px 5px var(--cor-sombra); /* Refatorado */
+    box-shadow: 0 2px 5px var(--cor-sombra); /* Refatorado (Aproximação) */
 }
 .hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; } /* Refatorado */
 .mobile-logo { height: 40px; }
@@ -251,34 +214,11 @@ body {
         overflow: hidden;
     }
     
-    .conteudos-header {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .btn-novo-item {
-        width: 100%;
-        justify-content: center;
-    }
     .autocuidado-tabs {
         flex-direction: column;
-        width: 100%;
     }
-
-    /* Cards no Mobile */
-    .pub-card {
-        flex-direction: column;
-        align-items: stretch; 
-    }
-    .pub-image {
-        width: 100%;
-        height: 180px; 
-    }
-    .btn-acessar {
-        margin-left: 0;
-        margin-top: 15px;
-        text-align: center;
-    }
-    .pub-admin-actions {
+    
+    .admin-actions {
         flex-direction: column;
     }
     .btn-crud {

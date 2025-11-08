@@ -18,7 +18,8 @@ $paginaAtiva = 'conteudos';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Vídeo - Firme Apoio</title>
-    
+
+    <link rel="stylesheet" href="../assets/css/tema.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/cadastro-video.css"> <!-- CSS Próprio -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -106,6 +107,7 @@ $paginaAtiva = 'conteudos';
 
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/cadastro-video.js"></script>
+    <script src="../assets/js/contraste.js"></script>
 
 </body>
 </html>

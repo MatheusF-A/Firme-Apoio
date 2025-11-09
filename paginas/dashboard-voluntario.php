@@ -24,7 +24,7 @@ $nomeVoluntario = $_SESSION['nome'] ?? 'Voluntário(a)';
     <title>Painel do Voluntário - Firme Apoio</title>
 
     <link rel="stylesheet" href="../assets/css/tema.css">
-    <link rel="stylesheet" href="../assets/css/sidebar.css">          
+    <link rel="stylesheet" href="../assets/css/sidebar.css">         
     <link rel="stylesheet" href="../assets/css/dashboard-voluntario.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -33,7 +33,7 @@ $nomeVoluntario = $_SESSION['nome'] ?? 'Voluntário(a)';
     <!-- Inclui o componente sidebar -->
     <?php require_once '../includes/sidebar.php'; ?>
 
-    <!-- Header para Mobile -->
+    <!-- Header para Mobile (Versão única, sem duplicatas) -->
     <header class="mobile-header">
         <button id="hamburger-btn" class="hamburger-btn">
             <i class="fas fa-bars"></i>
@@ -43,19 +43,7 @@ $nomeVoluntario = $_SESSION['nome'] ?? 'Voluntário(a)';
         </div>
     </header>
 
-    <!-- Overlay para fechar o menu em telas pequenas -->
-    <div id="overlay" class="overlay"></div>
-    <!-- Header para Mobile -->
-    <header class="mobile-header">
-        <button id="hamburger-btn" class="hamburger-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="mobile-logo">
-            <img src="../assets/img/logoLado.png" alt="Firme Apoio Logo">
-        </div>
-    </header>
-
-    <!-- Overlay para fechar o menu em telas pequenas -->
+    <!-- Overlay para fechar o menu (Versão única, sem duplicatas) -->
     <div id="overlay" class="overlay"></div>
 
     <!-- Conteúdo Principal -->
@@ -64,70 +52,49 @@ $nomeVoluntario = $_SESSION['nome'] ?? 'Voluntário(a)';
         <!-- Header de Boas-Vindas -->
         <header class="dashboard-header">
             <h1>Painel do Voluntário</h1>
-            <p>Bem-vindo(a) de volta, <?php echo htmlspecialchars($nomeVoluntario); ?>! Selecione uma ação abaixo.</p>
+            <p>Bem-vindo(a) de volta, <?php echo htmlspecialchars($nomeVoluntario); ?>! Selecione um atalho abaixo.</p>
         </header>
 
-        <!-- Grid de Cards de Ação -->
+        <!-- ---- GRID DE CARDS ATUALIZADA ---- -->
         <section class="action-grid">
-            <!-- Card 1: Acompanhamento de Usuários -->
+            
+            <!-- Card 1: Acompanhamento (Mantido) -->
             <a href="acompanhamento.php" class="action-card">
-                <div class="card-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3>Acompanhamento de Usuários</h3>
-                <p>Revisar autoavaliações e progresso dos usuários que você acompanha.</p>
+                <div class="card-icon"><i class="fas fa-users"></i></div>
+                <h3>Acompanhar Usuários</h3>
+                <p>Iniciar acompanhamentos e gerar relatórios de progresso dos pacientes.</p>
             </a>
             
-            <!-- Card 2: Visualizar Locais de Ajuda -->
-            <a href="ajuda-externa.php" class="action-card">
-                <div class="card-icon">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <h3>Visualizar Locais</h3>
-                <p>Ver a lista de todas as clínicas e locais de apoio cadastrados.</p>
+            <!-- Card 2: Cadastrar Publicação (Novo) -->
+            <a href="cadastrar-publicacao.php" class="action-card">
+                <div class="card-icon"><i class="fas fa-pen-to-square"></i></div>
+                <h3>Cadastrar Publicação</h3>
+                <p>Escrever e publicar novos artigos e materiais de leitura para os usuários.</p>
             </a>
 
-            <!-- Card 3: Cadastrar Novo Local -->
+            <!-- Card 3: Cadastrar Vídeo (Novo) -->
+            <a href="cadastrar-video.php" class="action-card">
+                <div class="card-icon"><i class="fas fa-video"></i></div>
+                <h3>Cadastrar Vídeo</h3>
+                <p>Adicionar novos vídeos do YouTube à plataforma de conteúdos.</p>
+            </a>
+
+            <!-- Card 4: Aprovar Depoimentos (Novo) -->
+            <a href="gerenciar-depoimentos.php" class="action-card">
+                <div class="card-icon"><i class="fas fa-check-square"></i></div>
+                <h3>Aprovar Depoimentos</h3>
+                <p>Moderar e aprovar os depoimentos enviados pelos usuários.</p>
+            </a>
+
+            <!-- Card 5: Cadastrar Local (Mantido) -->
             <a href="cadastrar-local.php" class="action-card">
-                <div class="card-icon">
-                    <i class="fas fa-plus-circle"></i>
-                </div>
-                <h3>Cadastrar Novo Local</h3>
-                <p>Adicionar uma nova clínica ou local de apoio ao sistema.</p>
-            </a>
-
-            <!-- Card 4: Gerenciar Publicações (Baseado no TCC) -->
-            <a href="gerenciar-publicacoes.php" class="action-card">
-                <div class="card-icon">
-                    <i class="fas fa-book-open"></i>
-                </div>
-                <h3>Gerenciar Publicações</h3>
-                <p>Escrever, editar e publicar artigos e materiais de leitura para os usuários.</p>
-            </a>
-
-            <!-- Card 5: Gerenciar Vídeos (Baseado no TCC) -->
-            <a href="gerenciar-videos.php" class="action-card">
-                <div class="card-icon">
-                    <i class="fas fa-video"></i>
-                </div>
-                <h3>Gerenciar Vídeos</h3>
-                <p>Adicionar ou remover vídeos de apoio da galeria de conteúdos.</p>
-            </a>
-
-            <!-- Card 6: Meu Perfil -->
-            <a href="perfil-voluntario.php" class="action-card">
-                <div class="card-icon">
-                    <i class="fas fa-user-edit"></i>
-                </div>
-                <h3>Meu Perfil</h3>
-                <p>Atualizar suas informações pessoais, área de atuação e senha.</p>
-            </a>
+                <div class="card-icon"><i class="fas fa-hospital"></i></div>
+                <h3>Cadastrar Locais de Ajuda</h3>
+                <p>Adicionar novas clínicas e locais de apoio ao mapa de ajuda externa.</p>
+            </a>>
         </section>
-
     </main>
-
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/contraste.js"></script>
-
 </body>
 </html>

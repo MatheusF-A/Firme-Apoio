@@ -1,16 +1,5 @@
-/* ---- 1. RESET E LAYOUT BASE ---- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--cor-fundo-pagina);
-    color: var(--cor-texto-secundaria);
-    min-height: 100vh;
-}
+/* ---- 1. LAYOUT BASE (Autossuficiente) ---- */
+/* O Reset (*) e o Body {} são herdados do sidebar.css */
 
 .main-content {
     margin-left: 260px; /* Abre espaço para a sidebar */
@@ -18,7 +7,7 @@ body {
     overflow-y: auto;
 }
 
-/* Header da Moderação (reutilizado de gerenciar-depoimentos) */
+/* Header da Moderação */
 .content-header-admin {
     background-color: var(--cor-fundo-card-secundario);
     border: 1px solid var(--cor-borda-clara);
@@ -45,24 +34,15 @@ body {
     align-items: center;
     gap: 10px;
     font-weight: 600;
+    color: var(--cor-texto-sobre-gradiente); 
 }
 .alert-message.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-body.high-contrast .alert-message.success {
     background-color: var(--cor-btn-success);
-    color: var(--cor-texto-sobre-gradiente);
+    border: 1px solid var(--cor-btn-success);
 }
 .alert-message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-body.high-contrast .alert-message.error {
     background-color: var(--cor-btn-danger);
-    color: var(--cor-texto-sobre-gradiente);
+    border: 1px solid var(--cor-btn-danger);
 }
 .alert-message i {
     font-size: 20px;
@@ -76,6 +56,7 @@ body.high-contrast .alert-message.error {
     box-shadow: 0 2px 8px var(--cor-sombra);
     padding: 20px 30px 30px 30px;
     margin-bottom: 30px;
+    border: 1px solid var(--cor-borda-clara); 
 }
 .acompanhamento-container h2 {
     font-size: 22px;
@@ -118,10 +99,10 @@ body.high-contrast .alert-message.error {
     font-size: 24px;
     color: var(--cor-texto-terciaria);
 }
-.usuario-info i.fa-user-check { /* Cor 'Meus Pacientes' */
+.usuario-info i.fa-user-check { 
     color: var(--cor-gradiente-texto);
 }
-.usuario-info i.fa-user-plus { /* Cor 'Disponíveis' */
+.usuario-info i.fa-user-plus { 
     color: var(--cor-btn-edit);
 }
 
@@ -138,6 +119,8 @@ body.high-contrast .alert-message.error {
 .usuario-actions {
     display: flex;
     gap: 10px;
+    flex-shrink: 0; 
+    flex-wrap: wrap; /* Adicionado para responsividade */
 }
 
 /* Botões */
@@ -153,10 +136,10 @@ body.high-contrast .alert-message.error {
     align-items: center;
     gap: 8px;
     transition: background-color 0.2s;
+    color: var(--cor-texto-sobre-gradiente);
 }
 .btn-adicionar {
     background-color: var(--cor-btn-success);
-    color: var(--cor-texto-sobre-gradiente);
 }
 .btn-adicionar:hover {
     background-color: var(--cor-btn-success-hover);
@@ -164,7 +147,6 @@ body.high-contrast .alert-message.error {
 
 .btn-remover {
     background-color: var(--cor-btn-danger);
-    color: #ffffff;
 }
 .btn-remover:hover {
     background-color: var(--cor-btn-danger-hover);
@@ -172,10 +154,21 @@ body.high-contrast .alert-message.error {
 
 .btn-relatorio {
     background-color: var(--cor-btn-edit);
-    color: #ffffff;
 }
 .btn-relatorio:hover {
     background-color: var(--cor-btn-edit-hover);
+}
+
+/* ----> NOVO ESTILO DE BOTÃO <---- */
+.btn-contatos {
+    background-color: var(--cor-btn-warning);
+    color: #ffffff; /* Texto branco para laranja */
+}
+body.high-contrast .btn-contatos {
+    color: var(--cor-texto-sobre-gradiente); /* Texto preto para amarelo */
+}
+.btn-contatos:hover {
+    background-color: var(--cor-btn-warning-hover);
 }
 
 
@@ -199,6 +192,20 @@ body.high-contrast .alert-message.error {
 .mobile-logo img { height: 100%; width: auto; }
 .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
 
+@media (max-width: 992px) {
+    .usuario-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .usuario-actions {
+        flex-direction: column;
+    }
+    .btn-crud {
+        justify-content: center;
+    }
+}
+
 @media (max-width: 768px) {
     .mobile-header {
         display: flex;
@@ -214,17 +221,5 @@ body.high-contrast .alert-message.error {
     }
     body.sidebar-open {
         overflow: hidden;
-    }
-    
-    .usuario-card {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
-    .usuario-actions {
-        flex-direction: column;
-    }
-    .btn-crud {
-        justify-content: center;
     }
 }

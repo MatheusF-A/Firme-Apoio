@@ -56,9 +56,9 @@ try {
     <title>Acompanhamentos - Firme Apoio</title>
     
     <link rel="stylesheet" href="../assets/css/tema.css"> 
-    
     <link rel="stylesheet" href="../assets/css/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/acompanhamento.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/acompanhamento.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -78,6 +78,7 @@ try {
             <p>Acompanhe seus pacientes ou selecione novos usuários para iniciar o acompanhamento.</p>
         </header>
 
+        <!-- Mensagens de Status -->
         <?php if ($status === 'sucesso'): ?>
             <div class="alert-message success">
                 <i class="fas fa-check-circle"></i> Ação realizada com sucesso!
@@ -94,6 +95,7 @@ try {
             </div>
         <?php endif; ?>
 
+        <!-- Seção 1: Meus Acompanhamentos -->
         <div class="acompanhamento-container">
             <h2>Meus Pacientes</h2>
             <div class="lista-usuarios">
@@ -110,11 +112,15 @@ try {
                                 </div>
                             </div>
                             <div class="usuario-actions">
+                                <a href="contatos-emergencia.php?id=<?php echo $paciente['usuarioID']; ?>" class="btn-crud btn-contatos">
+                                    <i class="fas fa-address-book"></i> Contatos
+                                </a>
+                                
+                                <a href="relatorio-usuario.php?id=<?php echo $paciente['usuarioID']; ?>" class="btn-crud btn-relatorio">
+                                    <i class="fas fa-file-pdf"></i> Relatório
+                                </a>
                                 <a href="../controles/remover-acompanhamento.php?id=<?php echo $paciente['usuarioID']; ?>" class="btn-crud btn-remover" onclick="return confirm('Tem certeza que deseja liberar este paciente?');">
                                     <i class="fas fa-times"></i> Liberar
-                                </a>
-                                <a href="relatorio-usuario.php?id=<?php echo $paciente['usuarioID']; ?>" class="btn-crud btn-relatorio">
-                                    <i class="fas fa-file-pdf"></i> Ver Relatório
                                 </a>
                             </div>
                         </article>
@@ -123,6 +129,7 @@ try {
             </div>
         </div>
 
+        <!-- Seção 2: Usuários Disponíveis -->
         <div class="acompanhamento-container">
             <h2>Usuários Disponíveis</h2>
             <div class="lista-usuarios">
@@ -152,5 +159,7 @@ try {
     </main>
 
     <script src="../assets/js/sidebar.js"></script>
-    <script src="../assets/js/contraste.js"></script> </body>
+    <script src="../assets/js/contraste.js"></script> 
+
+</body>
 </html>

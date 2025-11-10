@@ -1,0 +1,226 @@
+/* ---- 1. LAYOUT BASE (Autossuficiente) ---- */
+/* O Reset (*) e o Body {} são herdados do sidebar.css */
+
+.main-content {
+    margin-left: 260px; /* Abre espaço para a sidebar */
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* --- 2. CONTAINER PRINCIPAL --- */
+.contatos-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda-clara);
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 8px var(--cor-sombra);
+}
+
+.contatos-container h1 {
+    font-size: 24px;
+    color: var(--cor-texto-primaria);
+    margin-bottom: 5px;
+}
+.contatos-container > p {
+    font-size: 16px;
+    color: var(--cor-texto-secundaria);
+    margin-bottom: 25px;
+}
+
+/* Botão de Voltar */
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--cor-texto-secundaria);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.btn-voltar:hover {
+    background-color: var(--cor-fundo-input);
+}
+.btn-voltar i {
+    font-size: 14px;
+}
+
+/* Formulário de Adicionar */
+.contato-form {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--cor-borda-clara);
+}
+.form-inputs {
+    flex-grow: 1;
+    display: flex;
+    gap: 15px;
+}
+.form-inputs input[type="text"],
+.form-inputs input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--cor-borda-clara);
+    background-color: var(--cor-fundo-input);
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box; 
+    color: var(--cor-texto-primaria);
+}
+.btn-adicionar {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    background-color: var(--cor-btn-success);
+    color: var(--cor-texto-sobre-gradiente);
+}
+.btn-adicionar:hover {
+    background-color: var(--cor-btn-success-hover);
+}
+
+
+/* Lista de Contatos Salvos */
+.lista-contatos-titulo {
+    margin-bottom: 15px;
+}
+.lista-contatos-titulo h2 {
+    font-size: 20px;
+    color: var(--cor-texto-primaria);
+}
+
+.lista-vazia {
+    text-align: center;
+    font-size: 16px;
+    color: var(--cor-texto-terciaria);
+    padding: 40px 0;
+}
+
+.lista-contatos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contato-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: var(--cor-fundo-pagina);
+    border: 1px solid var(--cor-borda-clara);
+    border-radius: 8px;
+}
+.contato-icon {
+    font-size: 24px;
+    color: var(--cor-gradiente-texto);
+}
+.contato-info {
+    flex-grow: 1;
+}
+.contato-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--cor-texto-primaria);
+}
+.contato-info span {
+    font-size: 14px;
+    color: var(--cor-texto-secundaria);
+}
+
+/* ----> NOVOS ESTILOS <---- */
+.contato-actions {
+    display: flex;
+    gap: 8px;
+}
+.btn-crud {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    color: var(--cor-texto-sobre-gradiente);
+}
+.btn-editar {
+    background-color: var(--cor-btn-edit);
+}
+.btn-editar:hover {
+    background-color: var(--cor-btn-edit-hover);
+}
+.btn-deletar {
+    background-color: var(--cor-btn-danger);
+}
+.btn-deletar:hover {
+    background-color: var(--cor-btn-danger-hover);
+}
+
+
+/* --- 3. LAYOUT MOBILE --- */
+.mobile-header {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--cor-fundo-sidebar);
+    color: var(--cor-texto-primaria);
+    align-items: center;
+    padding: 0 15px;
+    z-index: 900;
+    box-shadow: 0 2px 5px var(--cor-sombra);
+}
+.hamburger-btn { background: none; border: none; color: var(--cor-texto-primaria); font-size: 24px; cursor: pointer; margin-right: 15px; }
+.mobile-logo { height: 40px; }
+.mobile-logo img { height: 100%; width: auto; }
+.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+    }
+    .main-content {
+        margin-left: 0;
+        padding-top: 75px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .contatos-container {
+        padding: 20px;
+        margin: 0 auto;
+    }
+    body.sidebar-open .overlay {
+        display: block;
+    }
+    body.sidebar-open {
+        overflow: hidden;
+    }
+    .contato-form {
+        flex-direction: column;
+    }
+    .form-inputs {
+        flex-direction: column;
+    }
+    .btn-adicionar {
+        justify-content: center;
+    }
+}

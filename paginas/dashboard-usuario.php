@@ -15,9 +15,8 @@ if (!isset($_SESSION['perfil']) || $_SESSION['perfil'] !== 'usuario') {
 // 2. Define a página ativa
 $paginaAtiva = 'inicio';
 $usuarioID = $_SESSION['id_usuario'];
-$nomeUsuario = $_SESSION['nome'] ?? 'Usuário(a)';
 
-// --- 3. LÓGICA DAS MÉTRICAS E HUMOR ---
+// --- 3. LÓGICA DAS MÉTRICAS DINÂMICAS ---
 $erro_metricas = null;
 $diasNaPlataforma = 0;
 $habitosTotal = 0;
@@ -26,7 +25,7 @@ $habitosPercent = 0;
 $exerciciosTotal = 0;
 $exerciciosConcluidos = 0;
 $exerciciosPercent = 0;
-$dadosHumorArray = []; // Array para o gráfico JS
+$dataCadastro = 'hoje'; // Padrão
 
 try {
     // 3a. Métrica 1: Dias na Plataforma
@@ -84,7 +83,6 @@ try {
     $stmtHumorGrafico->bindParam(':id', $usuarioID, PDO::PARAM_INT);
     $stmtHumorGrafico->execute();
     
-    // Inverte a ordem para que o gráfico comece do mais antigo
     $dadosHumorArray = array_reverse($stmtHumorGrafico->fetchAll(PDO::FETCH_ASSOC));
 
 } catch (Exception $e) {
@@ -96,7 +94,6 @@ $humorLabels = [];
 $humorData = [];
 
 foreach ($dadosHumorArray as $registro) {
-    // Formata a data para dia/mês (ex: 15/08)
     $humorLabels[] = date('d/m', strtotime($registro['dataRealizacao']));
     $humorData[] = $registro['notaHumor'];
 }
@@ -109,10 +106,7 @@ foreach ($dadosHumorArray as $registro) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início - Firme Apoio</title>
     
-    <!-- 1. O Dicionário de Cores (SEMPRE PRIMEIRO) -->
     <link rel="stylesheet" href="../assets/css/tema.css"> 
-    
-    <!-- 2. Os Outros CSS -->
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/dashboard-usuario.css"> 
     
@@ -132,19 +126,19 @@ foreach ($dadosHumorArray as $registro) {
 
     <main class="main-content">
         
-        <!-- Boas-vindas e Cartões Principais -->
+        <!-- Boas-vindas e Cartões Principais (AGORA 4 CARDS) -->
         <section class="main-cards-grid">
             
-            <!-- Card 1: Auto Cuidado (Link para Análise) -->
-            <a href="auto-cuidado.php" class="big-card">
+            <!-- Card 1: Auto Cuidado -->
+            <a href="auto-cuidado.php" class="big-card big-card-1">
                 <i class="fas fa-heart"></i>
                 <h2>AUTO CUIDADO</h2>
                 <p>RECURSOS PARA O SEU BEM-ESTAR DIÁRIO</p>
                 <div class="btn-acessar-simple">ACESSAR</div>
             </a>
 
-            <!-- Card 2: CONTEÚDOS (Substituindo Desabafo) -->
-            <a href="conteudos.php" class="big-card">
+            <!-- Card 2: Conteúdos -->
+            <a href="conteudos.php" class="big-card big-card-2">
                 <i class="fas fa-book-open"></i>
                 <h2>CONTEÚDOS</h2>
                 <p>ARTIGOS, VÍDEOS E DEPOIMENTOS DE APOIO</p>
@@ -152,11 +146,18 @@ foreach ($dadosHumorArray as $registro) {
             </a>
 
             <!-- Card 3: Ajuda Externa -->
-            <a href="ajuda-externa.php" class="big-card">
+            <a href="ajuda-externa.php" class="big-card big-card-3">
                 <i class="fas fa-map-marked-alt"></i>
                 <h2>AJUDA EXTERNA</h2>
                 <p>PROFISSIONAIS DISPONÍVEIS</p>
                 <div class="btn-acessar-simple">ACESSAR</div>
+            </a>
+            
+            <a href="cadastrar-contato.php" class="big-card big-card-4">
+                <i class="fas fa-address-book"></i>
+                <h2>CONTATOS DE EMERGÊNCIA</h2>
+                <p>CADASTRE QUEM PODE TE AJUDAR</p>
+                <div class="btn-acessar-simple">CADASTRAR</div>
             </a>
 
         </section>
@@ -195,7 +196,7 @@ foreach ($dadosHumorArray as $registro) {
 
         </section>
 
-        <!-- NOVO: Seu Panorama Emocional (Gráfico Chart.js) -->
+        <!-- Seu Panorama Emocional (Gráfico) -->
         <section class="panorama-section">
             <header>
                 <h2>Seu Panorama Emocional (Últimos 7 Registros)</h2>
@@ -203,10 +204,13 @@ foreach ($dadosHumorArray as $registro) {
             <div class="panorama-chart-container">
                 <canvas id="humorChart"></canvas>
             </div>
+        </section>
+        
+        <!-- (Seção de Atividade Recente removida) -->
         
     </main>
 
-    <!-- 4. Passa os dados do humor para o JavaScript -->
+    <!-- Passa os dados do humor para o JavaScript -->
     <script>
         const humorLabels = <?php echo json_encode($humorLabels); ?>;
         const humorData = <?php echo json_encode($humorData); ?>;
@@ -214,7 +218,7 @@ foreach ($dadosHumorArray as $registro) {
 
     <script src="../assets/js/sidebar.js"></script>
     <script src="../assets/js/contraste.js"></script> 
-    <script src="../assets/js/dashboard-usuario.js"></script> <!-- NOVO SCRIPT -->
+    <script src="../assets/js/dashboard-usuario.js"></script>
 
 </body>
 </html>

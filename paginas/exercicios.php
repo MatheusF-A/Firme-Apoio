@@ -150,7 +150,7 @@ try {
                                     $imgData = base64_encode($exercicio['imagem']);
                                     echo '<img src="data:image/jpeg;base64,' . $imgData . '" alt="' . htmlspecialchars($exercicio['nome']) . '">';
                                 } else {
-                                    echo '<img src="../assets/img/placeholder-habito.png" alt="Exercício">';
+                                    echo '<img src="../assets/img/placeholder-exercicio.png" alt="Exercício">';
                                 }
                                 ?>
                             </div>

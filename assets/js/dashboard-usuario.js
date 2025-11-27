@@ -1,39 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // NOTA: As variáveis humorLabels e humorData são passadas pelo PHP
-    if (typeof humorLabels === 'undefined' || humorData.length === 0) {
-        console.warn('Dados de humor insuficientes para desenhar o gráfico.');
+    // Verifica se há dados para o gráfico
+    if (typeof humorLabels === 'undefined' || typeof humorData === 'undefined' || humorData.length === 0) {
         return;
     }
 
     const ctx = document.getElementById('humorChart');
-    
-    // Função para obter o valor de uma variável CSS (útil para o Alto Contraste)
-    const getCssVar = (name) => getComputedStyle(document.body).getPropertyValue(name).trim();
+    if (!ctx) return;
 
-    // Define as cores dinamicamente
-    const primaryColor = getCssVar('--cor-gradiente-texto'); 
-    const textColor = getCssVar('--cor-texto-primaria'); 
-    const borderColor = getCssVar('--cor-borda-clara');
+    // Função para pegar as cores atuais do CSS (que mudam com o tema)
+    const getThemeColors = () => {
+        const styles = getComputedStyle(document.body);
+        return {
+            primary: styles.getPropertyValue('--cor-gradiente-texto').trim(),
+            text: styles.getPropertyValue('--cor-texto-primaria').trim(),
+            grid: styles.getPropertyValue('--cor-borda-clara').trim()
+        };
+    };
+
+    // Pega as cores iniciais
+    let colors = getThemeColors();
     
     // Cria o gráfico
     const humorChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: humorLabels, // Datas (ex: 15/08)
+            labels: humorLabels,
             datasets: [{
-                label: 'Nível de Humor (1-5)',
-                data: humorData, // Pontuações (1 a 5)
-                borderColor: primaryColor,
-                backgroundColor: 'rgba(0, 123, 255, 0.1)', // Um fundo leve
+                label: 'Nível de Humor',
+                data: humorData,
+                borderColor: colors.primary,
+                backgroundColor: 'rgba(0, 0, 0, 0.0)', // Transparente
                 borderWidth: 3,
-                tension: 0.4, // Suaviza a linha
-                pointRadius: 5,
-                pointBackgroundColor: primaryColor
+                tension: 0.4,
+                pointRadius: 6,
+                pointBackgroundColor: colors.primary,
+                pointBorderColor: colors.primary
             }]
         },
         options: {
-            maintainAspectRatio: false, // Permite definir altura
+            maintainAspectRatio: false,
             responsive: true,
             scales: {
                 y: {
@@ -41,41 +47,54 @@ document.addEventListener('DOMContentLoaded', () => {
                     max: 5,
                     ticks: {
                         stepSize: 1,
-                        color: textColor,
+                        color: colors.text, // Cor dinâmica
+                        font: { size: 11 },
                         callback: function(value) {
-                            // Converte a nota 1-5 em um rótulo de humor (para ser mais intuitivo)
-                            switch(value) {
-                                case 5: return 'Ótimo';
-                                case 4: return 'Bom';
-                                case 3: return 'Neutro';
-                                case 2: return 'Ruim';
-                                case 1: return 'Péssimo';
-                                default: return value;
-                            }
+                            const map = {1: 'Péssimo', 2: 'Ruim', 3: 'Neutro', 4: 'Bom', 5: 'Ótimo'};
+                            return map[value] || value;
                         }
                     },
                     grid: {
-                        color: borderColor
+                        color: colors.grid, // Cor dinâmica
+                        borderDash: [5, 5]
                     }
                 },
                 x: {
                     ticks: {
-                        color: textColor
+                        color: colors.text // Cor dinâmica
                     },
                     grid: {
-                        color: borderColor
+                        display: false // Remove a grade vertical para limpar o visual
                     }
                 }
             },
             plugins: {
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: false
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff'
                 }
             }
         }
+    });
+
+    // ----> A MÁGICA: Atualiza o gráfico quando o tema muda <----
+    window.addEventListener('temaMudou', () => {
+        // 1. Pega as novas cores (que agora são amarelo/preto no alto contraste)
+        const newColors = getThemeColors();
+
+        // 2. Aplica as novas cores nas propriedades do gráfico
+        humorChart.data.datasets[0].borderColor = newColors.primary;
+        humorChart.data.datasets[0].pointBackgroundColor = newColors.primary;
+        humorChart.data.datasets[0].pointBorderColor = newColors.primary;
+        
+        humorChart.options.scales.y.ticks.color = newColors.text;
+        humorChart.options.scales.x.ticks.color = newColors.text;
+        humorChart.options.scales.y.grid.color = newColors.grid;
+
+        // 3. Redesenha o gráfico
+        humorChart.update();
     });
 
 });

@@ -44,9 +44,6 @@
 }
 
 
-/* * SOBRESCREVE AS VARIÁVEIS QUANDO O MODO DE ALTO CONTRASTE ESTÁ ATIVO
- * (Baseado na imagem image_ada966.png)
- */
 body.high-contrast {
     /* Fundos */
     --cor-fundo-pagina: #000000;

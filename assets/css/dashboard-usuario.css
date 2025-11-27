@@ -184,7 +184,6 @@
 .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999; }
 
 @media (max-width: 992px) {
-    /* (A regra das 2 colunas para .main-cards-grid foi removida, pois 2 já é o padrão) */
     .metrics-section {
         grid-template-columns: repeat(2, 1fr);
     }

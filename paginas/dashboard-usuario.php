@@ -201,7 +201,7 @@ foreach ($dadosHumorArray as $registro) {
             <header>
                 <h2>Seu Panorama Emocional (Últimos 7 Registros)</h2>
             </header>
-            <div class="panorama-chart-container">
+            <div class="panorama-chart-container" id="panorama-chart-container">
                 <canvas id="humorChart"></canvas>
             </div>
         </section>

@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // 10. Sucesso
         echo "<script>
                 alert('Cadastro realizado com sucesso! Você será redirecionado para o login.');
-                window.location.href = 'index.php';
+                window.location.href = '../index.php';
               </script>";
         exit();
 

@@ -91,7 +91,7 @@ $nomeVoluntario = $_SESSION['nome'] ?? 'Voluntário(a)';
                 <div class="card-icon"><i class="fas fa-hospital"></i></div>
                 <h3>Cadastrar Locais de Ajuda</h3>
                 <p>Adicionar novas clínicas e locais de apoio ao mapa de ajuda externa.</p>
-            </a>>
+            </a>
         </section>
     </main>
     <script src="../assets/js/sidebar.js"></script>

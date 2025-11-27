@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleSenhaBtn = document.getElementById('toggle-senha');
     const toggleConfirmarSenhaBtn = document.getElementById('toggle-confirmar-senha');
 
-    /* --- Funções de Validação (Apenas Correspondência) --- */
+    /* --- Funções de Validação --- */
     function verificaSenhas() {
         if (confirmarSenhaInput.value.length === 0 && senhaInput.value.length === 0) {
             erroConfirmarSenha.textContent = '';

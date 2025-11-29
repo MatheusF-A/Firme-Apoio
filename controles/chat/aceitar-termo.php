@@ -1,46 +1,45 @@
 <?php
-// controles/aceitar-termo.php
+// controles/chat/aceitar-termo.php
 session_start();
 require_once('../../config/conexao.php');
-require_once('../../includes/gerar-nickname.php'); // Importante: Inclui o gerador
+require_once('../../includes/gerar-nickname.php'); 
 
 header('Content-Type: application/json');
 
-// 1. Segurança
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['status' => 'error', 'message' => 'Método inválido']);
     exit;
 }
 
-if (!isset($_SESSION['id_usuario']) || $_SESSION['perfil'] !== 'usuario') {
-    echo json_encode(['status' => 'error', 'message' => 'Acesso não autorizado']);
+if (!isset($_SESSION['id_usuario']) || !isset($_SESSION['perfil'])) {
+    echo json_encode(['status' => 'error', 'message' => 'Não autorizado']);
     exit;
 }
 
-$usuarioID = $_SESSION['id_usuario'];
+$id = $_SESSION['id_usuario'];
+$perfil = $_SESSION['perfil'];
 
 try {
-    // 2. Gera o Nickname AGORA (momento do aceite)
-    $novoNick = gerarNicknameAleatorio();
+    if ($perfil === 'usuario') {
+        // Lógica para Usuário: Gera Nickname + Aceite
+        $novoNick = gerarNicknameAleatorio();
+        $sql = "UPDATE usuario SET termo_chat_aceito = 1, chat_nickname = :nick WHERE usuarioID = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':nick', $novoNick);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
 
-    // 3. Atualiza o banco: Aceite = 1 E define o Nickname
-    $sql = "UPDATE usuario 
-            SET termo_chat_aceito = 1, 
-                chat_nickname = :nick 
-            WHERE usuarioID = :id";
-            
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':nick', $novoNick);
-    $stmt->bindParam(':id', $usuarioID, PDO::PARAM_INT);
-    $stmt->execute();
-
-    echo json_encode([
-        'status' => 'success', 
-        'message' => 'Bem-vindo ao chat! Sua identidade secreta é: ' . $novoNick,
-        'nickname' => $novoNick
-    ]);
+    } elseif ($perfil === 'voluntario') {
+        // Lógica para Voluntário: Apenas Aceite (Sem Nickname, pois é Moderador)
+        $sql = "UPDATE voluntario SET termo_chat_aceito = 1 WHERE voluntarioID = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+    }
+    
+    echo json_encode(['status' => 'success']);
 
 } catch (PDOException $e) {
-    echo json_encode(['status' => 'error', 'message' => 'Erro no banco: ' . $e->getMessage()]);
+    echo json_encode(['status' => 'error', 'message' => 'Erro DB: ' . $e->getMessage()]);
 }
 ?>

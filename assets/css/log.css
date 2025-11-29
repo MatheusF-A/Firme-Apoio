@@ -1,0 +1,116 @@
+/* assets/css/log.css */
+
+.main-content {
+    margin-left: 260px;
+    padding: 2rem;
+    background-color: var(--cor-fundo-pagina);
+    min-height: 100vh;
+    color: var(--cor-texto-primaria);
+    transition: margin-left 0.3s ease;
+}
+
+.header-log {
+    margin-bottom: 2rem;
+}
+.header-log h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto-primaria);
+}
+.header-log p {
+    color: var(--cor-texto-secundaria);
+}
+
+/* Container da Tabela (Card) */
+.table-container {
+    background-color: var(--cor-fundo-card);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--cor-sombra);
+    overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+    border: 1px solid var(--cor-borda-clara);
+}
+
+/* Tabela */
+.log-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px; /* Força largura mínima pra não espremer */
+}
+
+.log-table th, 
+.log-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--cor-borda-clara);
+}
+
+.log-table th {
+    background-color: var(--cor-fundo-input);
+    font-weight: bold;
+    color: var(--cor-texto-terciaria);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Colunas Específicas */
+.col-data {
+    width: 140px;
+    color: var(--cor-texto-terciaria);
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.col-real {
+    color: var(--cor-texto-primaria);
+    width: 20%;
+}
+
+.col-nick {
+    color: var(--cor-texto-secundaria);
+    font-style: italic;
+    width: 15%;
+}
+
+.col-msg {
+    color: var(--cor-texto-primaria);
+    line-height: 1.4;
+}
+
+/* Destaque para Voluntários (Moderadores) */
+.row-mod {
+    background-color: rgba(255, 234, 167, 0.15); /* Amarelo muito suave */
+}
+
+.tag-mod {
+    background-color: #ffeaa7;
+    color: #d35400;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-style: normal;
+    border: 1px solid #fdcb6e;
+}
+
+/* Estado Vazio */
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: var(--cor-texto-terciaria);
+}
+
+/* Ajustes para Alto Contraste */
+body.high-contrast .row-mod {
+    background-color: #2d2600; /* Fundo escuro amarelado */
+}
+body.high-contrast .tag-mod {
+    background-color: #554400;
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 768px) {
+    .main-content { margin-left: 0; }
+}

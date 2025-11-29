@@ -1,36 +1,45 @@
 <?php
 // paginas/chat/chat.php
 session_start();
-
-// 1. Sobe 2 níveis para achar a conexão
 require_once('../../config/conexao.php');
 
-// 2. Segurança
-if (!isset($_SESSION['id_usuario']) || $_SESSION['perfil'] !== 'usuario') {
+if (!isset($_SESSION['id_usuario']) || !isset($_SESSION['perfil'])) {
     header("Location: ../../index.php");
     exit;
 }
 
 $usuarioID = $_SESSION['id_usuario'];
-$paginaAtiva = 'chat'; 
+$perfil = $_SESSION['perfil'];
 
-// 3. Busca dados do usuário (Termo e Nickname)
-$stmt = $conn->prepare("SELECT termo_chat_aceito, chat_nickname FROM usuario WHERE usuarioID = :id");
-$stmt->bindParam(':id', $usuarioID);
-$stmt->execute();
-$userDados = $stmt->fetch(PDO::FETCH_ASSOC);
+// Variáveis
+$banido = false;
+$aceitouTermo = false;
+$meuNickname = '';
 
-$aceitouTermo = ($userDados && $userDados['termo_chat_aceito'] == 1);
-$meuNickname = $userDados['chat_nickname'];
+if ($perfil === 'usuario') {
+    $stmt = $conn->prepare("SELECT termo_chat_aceito, chat_nickname, chat_banido FROM usuario WHERE usuarioID = :id");
+    $stmt->bindParam(':id', $usuarioID);
+    $stmt->execute();
+    $d = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($d) {
+        if ($d['chat_banido'] == 1) $banido = true;
+        $aceitouTermo = ($d['termo_chat_aceito'] == 1);
+        $meuNickname = $d['chat_nickname'];
+    }
+} elseif ($perfil === 'voluntario') {
+    $stmt = $conn->prepare("SELECT termo_chat_aceito FROM voluntario WHERE voluntarioID = :id");
+    $stmt->bindParam(':id', $usuarioID);
+    $stmt->execute();
+    $d = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($d) $aceitouTermo = ($d['termo_chat_aceito'] == 1);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Coletivo - Firme Apoio</title>
-    
+    <title>Chat - Firme Apoio</title>
     <link rel="stylesheet" href="../../assets/css/tema.css">
     <link rel="stylesheet" href="../../assets/css/sidebar.css">
     <link rel="stylesheet" href="../../assets/css/chat.css">
@@ -38,78 +47,135 @@ $meuNickname = $userDados['chat_nickname'];
 </head>
 <body>
 
-    <?php 
-    $path = '../../'; 
-    include('../../includes/sidebar.php'); 
-    ?>
+    <?php $path = '../../'; include('../../includes/sidebar.php'); ?>
 
     <div class="main-content">
-        
-        <div class="chat-header">
-            <div class="header-info">
-                <h1>Espaço de Convivência</h1>
-                <p>Troque experiências com outros participantes.</p>
+        <?php if ($banido): ?>
+            <div class="banned-screen">
+                <i class="fas fa-ban"></i>
+                <h1>Acesso Suspenso</h1>
+                <p>Você foi removido deste chat.</p>
+                <a href="../dashboard_usuario.php" class="btn-voltar">Voltar</a>
             </div>
-            
-            <?php if ($aceitouTermo && !empty($meuNickname)): ?>
-            <div class="user-identity">
-                <small>Você está visível como:</small>
-                <span class="badge-nick"><i class="fas fa-mask"></i> <?php echo htmlspecialchars($meuNickname); ?></span>
-            </div>
-            <?php endif; ?>
-        </div>
+        <?php else: ?>
+            <div class="chat-header">
+                <div class="header-info">
+                    <h1>Espaço de Convivência</h1>
+                    <p>Troque experiências.</p>
+                </div>
+                
+                <div class="header-actions">
+                    <?php if ($perfil === 'voluntario'): ?>
+                        <button onclick="abrirModalBanidos()" class="btn-ver-banidos">
+                            <i class="fas fa-user-slash"></i> Banidos
+                        </button>
 
-        <div class="chat-wrapper <?php echo !$aceitouTermo ? 'blur-content' : ''; ?>">
-            
-            <div class="chat-window" id="chat-window">
-                <div class="empty-state">
-                    <i class="fas fa-comments"></i>
-                    <p>O chat está silencioso...</p>
+                        <a href="log.php" class="btn-ver-log" title="Ver Histórico Completo">
+                            <i class="fas fa-list-alt"></i> Log
+                        </a>
+                        
+                    <?php endif; ?>
+
+                    <div class="header-identity">
+                        <?php if ($perfil === 'usuario' && $aceitouTermo): ?>
+                            <span class="badge-nick"><i class="fas fa-mask"></i> <?php echo htmlspecialchars($meuNickname); ?></span>
+                        <?php elseif ($perfil === 'voluntario'): ?>
+                            <span class="badge-mod">MODERADOR</span>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
 
-            <form id="form-chat" class="chat-input-area">
-                <input type="text" id="mensagem-input" placeholder="Digite sua mensagem..." autocomplete="off" <?php echo !$aceitouTermo ? 'disabled' : ''; ?>>
-                <button type="submit" id="btn-enviar" <?php echo !$aceitouTermo ? 'disabled' : ''; ?>>
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
-
-        </div>
-
+            <div class="chat-wrapper <?php echo (!$aceitouTermo) ? 'blur-content' : ''; ?>">
+                <div class="chat-window" id="chat-window"></div>
+                <form id="form-chat" class="chat-input-area">
+                    <input type="text" id="mensagem-input" placeholder="Digite..." autocomplete="off" <?php echo (!$aceitouTermo) ? 'disabled' : ''; ?>>
+                    <button type="submit" id="btn-enviar" <?php echo (!$aceitouTermo) ? 'disabled' : ''; ?>><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        <?php endif; ?>
     </div>
 
-    <?php if (!$aceitouTermo): ?>
+    <?php if (!$banido && !$aceitouTermo): ?>
     <div class="modal-overlay" id="modal-disclaimer">
         <div class="modal-box warning">
-            <div class="modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
-            <h2>Atenção: Funcionalidade Opcional</h2>
-            <div class="modal-body">
-                <p>Você está prestes a entrar no <strong>Chat Coletivo</strong>. Por favor, leia com atenção:</p>
-                <ul>
-                    <li>Esta é uma funcionalidade <strong>experimental e opcional</strong>.</li>
-                    <li>Sua identidade real será preservada publicamente.</li>
-                    <li>A plataforma não se responsabiliza pelo conteúdo postado.</li>
+            <div class="modal-icon"><i class="fas fa-file-contract"></i></div>
+            <h2>Termos de Uso</h2>
+            <div class="modal-body text-left">
+                <ul class="termos-lista">
+                    <li><i class="fas fa-user-secret"></i> Identidade: <?php echo ($perfil === 'usuario') ? 'Foi gerado um apelido aleatório anônimo, para proteger sua identidade' : 'Você é um MODERADOR, Ao clicar sobre uma mensagem, você pode banir um usuário do chat.'; ?></li>
+                    <li><i class="fas fa-save"></i> Rastreabilidade: Suas ações são registradas e salvas nos registros da sua conta.</li>
+                    <li><i class="fas fa-gavel"></i> Regras: Ofensas geram banimento.</li>
+                    <li><i class="fas fa-exclamation-circle"></i> Isenção: Plataforma não se responsabiliza por nada escrito neste chat.</li>
                 </ul>
             </div>
             <div class="modal-actions">
-                <a href="../dashboard_usuario.php" class="btn-cancel">Não quero participar</a>
-                <button id="btn-aceitar-termo" class="btn-confirm">Estou ciente e quero entrar</button>
+                <a href="../../index.php" class="btn-cancel">Sair</a>
+                <button id="btn-aceitar-termo" class="btn-confirm">Aceitar</button>
             </div>
         </div>
     </div>
-    <script src="../../assets/js/chat-disclaimer.js"></script>
+    <script>
+        document.getElementById('btn-aceitar-termo').addEventListener('click', function() {
+            fetch('../../controles/chat/aceitar-termo.php', { method: 'POST' })
+            .then(r => r.json()).then(d => { if(d.status === 'success') window.location.reload(); });
+        });
+    </script>
+    <?php endif; ?>
+
+    <?php if ($perfil === 'voluntario'): ?>
+    <div class="modal-overlay" id="modal-detalhes" style="display:none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Gerenciar Usuário</h2>
+                <button class="close-modal" onclick="fecharModalDetalhes()">&times;</button>
+            </div>
+            <div class="modal-body text-left" id="corpo-detalhes">
+                <p>Carregando...</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="fecharModalDetalhes()">Cancelar</button>
+                <button id="btn-confirmar-ban" class="btn-banir">BANIR USUÁRIO</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-lista-banidos" style="display:none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Usuários Banidos</h2>
+                <button class="close-modal" onclick="fecharModalBanidos()">&times;</button>
+            </div>
+            <div class="modal-body" style="max-height:60vh; overflow-y:auto;">
+                <ul id="lista-banidos-ul" class="lista-banidos-style">
+                    <li>Carregando...</li>
+                </ul>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="fecharModalBanidos()">Fechar</button>
+            </div>
+        </div>
+    </div>
     <?php endif; ?>
 
     <script src="../../assets/js/sidebar.js"></script>
     <script src="../../assets/js/contraste.js"></script>
-    
-    <?php if ($aceitouTermo): ?>
-        <script>
-            const ROTA_ENVIAR = '../../controles/chat/enviar-mensagem.php';
-            const ROTA_LISTAR = '../../controles/chat/listar-mensagens.php';
-        </script>
-        <script src="../../assets/js/chat.js"></script>
+
+    <?php if ($aceitouTermo && !$banido): ?>
+    <script>
+        // ROTAS GERAIS
+        const ROTA_ENVIAR = '../../controles/chat/enviar-mensagem.php';
+        const ROTA_LISTAR = '../../controles/chat/listar-mensagens.php';
+        const ROTA_DADOS  = '../../controles/chat/obter-dados-usuario.php';
+        const ROTA_BANIR  = '../../controles/chat/banir-usuario.php';
+        
+        // ROTAS NOVAS
+        const ROTA_LISTAR_BANIDOS = '../../controles/chat/listar-banidos.php';
+        const ROTA_DESBANIR       = '../../controles/chat/desbanir-usuario.php';
+        
+        const EH_VOLUNTARIO = <?php echo ($perfil === 'voluntario') ? 'true' : 'false'; ?>;
+    </script>
+    <script src="../../assets/js/chat.js"></script>
     <?php endif; ?>
 
 </body>

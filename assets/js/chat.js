@@ -1,4 +1,6 @@
-// assets/js/chat.js
+/* assets/js/chat.js */
+
+let usuarioAlvoId = null; // Controle global para o modal
 
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -7,90 +9,157 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputMsg = document.getElementById('mensagem-input');
     const btnEnviar = document.getElementById('btn-enviar');
 
-    let totalMensagensCarregadas = 0;
+    let ultimoId = 0;
+    let primeiroCarregamento = true; // <--- NOVA VARIÁVEL DE CONTROLE
 
-    // --- 1. FUNÇÃO DE ENVIAR ---
+    // --- ENVIAR ---
     if (formChat) {
         formChat.addEventListener('submit', function(e) {
-            e.preventDefault(); // Impede recarregamento da página
+            e.preventDefault();
+            const txt = inputMsg.value.trim();
+            if(!txt) return;
 
-            const texto = inputMsg.value.trim();
-            if (texto === "") return;
-
-            // Bloqueia input enquanto envia
             inputMsg.disabled = true;
             btnEnviar.disabled = true;
+            const fd = new FormData();
+            fd.append('mensagem', txt);
 
-            const formData = new FormData();
-            formData.append('mensagem', texto);
-
-            fetch('../../controles/chat/enviar-mensagem.php', {
-                method: 'POST',
-                body: formData
+            fetch(ROTA_ENVIAR, { method: 'POST', body: fd })
+            .then(r => r.json())
+            .then(d => {
+                if(d.status === 'success') { inputMsg.value = ''; carregarMensagens(); }
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    inputMsg.value = ''; // Limpa campo
-                    carregarMensagens(); // Força atualização imediata
-                } else {
-                    alert('Erro: ' + data.message);
-                }
-            })
-            .catch(err => console.error(err))
-            .finally(() => {
-                // Libera input
-                inputMsg.disabled = false;
-                btnEnviar.disabled = false;
-                inputMsg.focus();
-            });
+            .finally(() => { inputMsg.disabled = false; btnEnviar.disabled = false; inputMsg.focus(); });
         });
     }
 
-    // --- 2. FUNÇÃO DE BUSCAR MENSAGENS (Polling) ---
+    // --- LISTAR ---
     function carregarMensagens() {
-        fetch('../../controles/chat/listar-mensagens.php')
-        .then(response => response.json())
-        .then(mensagens => {
+        fetch(ROTA_LISTAR)
+        .then(r => r.json())
+        .then(lista => {
             
-            // Se o número de mensagens mudou, renderiza tudo de novo
-            // (Para otimizar, poderíamos buscar só novos IDs, mas para este escopo, limpar e renderizar é seguro)
-            if (mensagens.length > totalMensagensCarregadas) {
-                
-                chatWindow.innerHTML = ''; // Limpa container
+            // CORREÇÃO VISUAL:
+            // Se for a primeira vez que conectamos com sucesso, removemos o "Carregando..."
+            // independentemente se tem mensagens ou não.
+            if (primeiroCarregamento) {
+                const empty = chatWindow.querySelector('.empty-state');
+                if (empty) {
+                    if (lista.length === 0) {
+                        // Se estiver vazio, muda o texto
+                        empty.innerHTML = '<i class="fas fa-comment-slash"></i><p>Nenhuma mensagem ainda.<br>Seja o primeiro!</p>';
+                    } else {
+                        // Se tem mensagens, remove o aviso
+                        empty.remove();
+                    }
+                }
+                primeiroCarregamento = false;
+            }
 
-                mensagens.forEach(msg => {
-                    const divMsg = document.createElement('div');
+            // Filtra apenas as novas
+            const novas = lista.filter(m => Number(m.id) > ultimoId);
+
+            if (novas.length > 0) {
+                // Garante que o placeholder sumiu se chegar mensagem nova
+                const empty = chatWindow.querySelector('.empty-state');
+                if(empty) empty.remove();
+
+                novas.forEach(msg => {
+                    const div = document.createElement('div');
+                    let cssClass = msg.sou_eu ? 'msg-minha' : 'msg-outros';
+                    if(msg.is_admin) cssClass += ' msg-admin-style';
+
+                    div.className = `mensagem-box ${cssClass}`;
                     
-                    // Define a classe baseada em quem enviou (Minha x Outros)
-                    const classeTipo = msg.sou_eu ? 'msg-minha' : 'msg-outros';
-                    divMsg.classList.add('mensagem-box', classeTipo);
+                    // Clique para banir (Apenas Voluntário)
+                    if (typeof EH_VOLUNTARIO !== 'undefined' && EH_VOLUNTARIO === true && !msg.is_admin) {
+                        div.style.cursor = 'pointer';
+                        div.title = 'Clique para ver dados e banir';
+                        div.onclick = () => abrirModalDetalhes(msg.user_id_real);
+                    }
 
-                    divMsg.innerHTML = `
+                    div.innerHTML = `
                         <div class="msg-header">
-                            <span class="msg-autor">${msg.autor}</span>
+                            <span class="msg-autor">
+                                ${msg.is_admin ? '<i class="fas fa-shield-alt"></i> ' : ''}
+                                ${msg.autor}
+                            </span>
                             <span class="msg-hora">${msg.hora}</span>
                         </div>
-                        <div class="msg-conteudo">
-                            ${msg.texto}
-                        </div>
+                        <div class="msg-conteudo">${msg.texto}</div>
                     `;
-
-                    chatWindow.appendChild(divMsg);
+                    chatWindow.appendChild(div);
+                    if(Number(msg.id) > ultimoId) ultimoId = Number(msg.id);
                 });
-
-                // Rola para o final automaticamente
-                chatWindow.scrollTop = chatWindow.scrollHeight;
                 
-                totalMensagensCarregadas = mensagens.length;
+                chatWindow.scrollTo({ top: chatWindow.scrollHeight, behavior: 'smooth' });
             }
         })
-        .catch(err => console.error("Erro no polling:", err));
+        .catch(err => {
+            console.error("Erro polling:", err);
+        });
     }
 
-    // Carrega a primeira vez
     carregarMensagens();
-
-    // Roda a cada 3 segundos
     setInterval(carregarMensagens, 3000);
 });
+
+// --- FUNÇÕES GLOBAIS (MODAL) ---
+
+function abrirModalDetalhes(idUsuario) {
+    if(!idUsuario) return;
+    const modal = document.getElementById('modal-detalhes');
+    const corpo = document.getElementById('corpo-detalhes');
+    
+    usuarioAlvoId = idUsuario;
+    modal.style.display = 'flex';
+    corpo.innerHTML = '<p>Carregando dados...</p>';
+
+    const fd = new FormData();
+    fd.append('id_alvo', idUsuario);
+
+    fetch(ROTA_DADOS, { method: 'POST', body: fd })
+    .then(r => r.json())
+    .then(resp => {
+        if(resp.status === 'success') {
+            const d = resp.dados;
+            corpo.innerHTML = `
+                <p><strong>Nome:</strong> ${d.Nome}</p>
+                <p><strong>Email:</strong> ${d.email}</p>
+                <p><strong>Nick:</strong> ${d.chat_nickname}</p>
+                <p><strong>Desde:</strong> ${d.dtCadastro}</p>
+                <hr>
+                <p style="color:red; font-size:0.9rem;">Banimento é imediato.</p>
+            `;
+        } else {
+            corpo.innerHTML = '<p>Erro ao buscar dados.</p>';
+        }
+    });
+}
+
+function fecharModalDetalhes() {
+    document.getElementById('modal-detalhes').style.display = 'none';
+    usuarioAlvoId = null;
+}
+
+const btnConfirmarBan = document.getElementById('btn-confirmar-ban');
+if(btnConfirmarBan) {
+    btnConfirmarBan.addEventListener('click', function() {
+        if(!usuarioAlvoId) return;
+        if(confirm('Tem certeza?')) {
+            const fd = new FormData();
+            fd.append('id_alvo', usuarioAlvoId);
+            fetch(ROTA_BANIR, { method: 'POST', body: fd })
+            .then(r => r.json())
+            .then(d => {
+                if(d.status === 'success') {
+                    alert('Banido!');
+                    fecharModalDetalhes();
+                    window.location.reload(); 
+                } else {
+                    alert('Erro.');
+                }
+            });
+        }
+    });
+}

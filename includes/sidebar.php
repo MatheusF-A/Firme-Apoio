@@ -25,9 +25,6 @@ $linkAutoCuidado = ($perfil === 'voluntario') ? 'acompanhamento.php' : 'auto-cui
             <i class="fas fa-home"></i> Início
         </a>
         
-        <a href="<?php echo $path; ?>paginas/conteudos.php" class="<?php echo ($paginaAtiva === 'conteudos') ? 'active' : ''; ?>">
-            <i class="fas fa-book-open"></i> Conteúdos
-        </a>
         
         <!-- Link "Auto Cuidado" agora é dinâmico -->
         <a href="<?php echo $path; ?>paginas/<?php echo $linkAutoCuidado; ?>" class="<?php echo ($paginaAtiva === 'auto-cuidado') ? 'active' : ''; ?>">
@@ -36,12 +33,18 @@ $linkAutoCuidado = ($perfil === 'voluntario') ? 'acompanhamento.php' : 'auto-cui
             <?php echo ($perfil === 'voluntario') ? 'Acompanhamento' : 'Auto Cuidado'; ?>
         </a>
         
-        <a href="<?php echo $path; ?>paginas/chat/chat.php" class="<?php echo ($paginaAtiva === 'chat') ? 'active' : ''; ?>">
-            <i class="fas fa-comment-dots"></i> Desabafo
-        </a>
         <a href="<?php echo $path; ?>paginas/ajuda-externa.php" class="<?php echo ($paginaAtiva === 'ajuda-externa') ? 'active' : ''; ?>">
             <i class="fas fa-map-marked-alt"></i> Ajuda Externa
         </a>
+
+        <a href="<?php echo $path; ?>paginas/conteudos.php" class="<?php echo ($paginaAtiva === 'conteudos') ? 'active' : ''; ?>">
+            <i class="fas fa-book-open"></i> Conteúdos
+        </a>
+
+        <a href="<?php echo $path; ?>paginas/chat/chat.php" class="<?php echo ($paginaAtiva === 'chat') ? 'active' : ''; ?>">
+            <i class="fas fa-comment-dots"></i> Chat
+        </a>
+        
     </nav>
 
     <div class="sidebar-footer">

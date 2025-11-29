@@ -1,43 +1,83 @@
 <?php
-// controles/listar-mensagens.php
+// controles/chat/listar-mensagens.php
 session_start();
 require_once('../../config/conexao.php');
 
-header('Content-Type: application/json');
+// Cabeçalho JSON limpo
+header('Content-Type: application/json; charset=utf-8');
 
-if (!isset($_SESSION['id_usuario'])) {
-    echo json_encode([]);
-    exit;
-}
-
-$meuID = $_SESSION['id_usuario'];
+$meuID = $_SESSION['id_usuario'] ?? 0;
+$meuPerfil = $_SESSION['perfil'] ?? '';
 
 try {
-    // Busca as últimas 50 mensagens
-    // JOIN com usuario para pegar o chat_nickname
-    $sql = "SELECT m.mensagemID, m.mensagem, m.dataEnvio, m.usuarioID, u.chat_nickname 
+    // 1. QUERY SIMPLIFICADA
+    // Trazemos apenas o necessário. O LEFT JOIN é só para pegar o nickname do usuário.
+    // O voluntário não precisa de JOIN, pois o nome será fixo "MODERADOR".
+    $sql = "SELECT 
+                m.mensagemID, 
+                m.mensagem, 
+                m.dataEnvio, 
+                m.usuarioID, 
+                m.voluntarioID,
+                u.chat_nickname
             FROM chat_mensagens m
-            JOIN usuario u ON m.usuarioID = u.usuarioID
-            ORDER BY m.mensagemID ASC"; // Ordem cronológica
+            LEFT JOIN usuario u ON m.usuarioID = u.usuarioID
+            ORDER BY m.mensagemID ASC";
             
     $stmt = $conn->query($sql);
-    $mensagens = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Se der erro na consulta, retornamos array vazio para não travar a tela
+    if (!$stmt) {
+        echo json_encode([]);
+        exit;
+    }
 
+    $mensagens = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $resultado = [];
 
     foreach ($mensagens as $msg) {
+        
+        // 2. Lógica: É Voluntário?
+        $idVol = $msg['voluntarioID'];
+        // Verifica se não é nulo e é maior que 0
+        $ehVoluntario = (!empty($idVol) && $idVol > 0);
+
+        // 3. Define Autor
+        if ($ehVoluntario) {
+            $autor = "MODERADOR";
+            $isAdmin = true;
+            $idReal = null; // Voluntário não é banível por aqui
+        } else {
+            // Se o nickname vier nulo (ex: usuário deletado), põe 'Anônimo'
+            $autor = !empty($msg['chat_nickname']) ? $msg['chat_nickname'] : 'Anônimo';
+            $isAdmin = false;
+            $idReal = $msg['usuarioID'];
+        }
+
+        // 4. Sou Eu?
+        $souEu = false;
+        if ($meuPerfil === 'voluntario' && $ehVoluntario && $idVol == $meuID) {
+            $souEu = true;
+        } elseif ($meuPerfil === 'usuario' && !$ehVoluntario && $msg['usuarioID'] == $meuID) {
+            $souEu = true;
+        }
+
+        // 5. Monta Objeto
         $resultado[] = [
-            'id' => $msg['mensagemID'],
-            'texto' => htmlspecialchars($msg['mensagem']), // Sanitiza XSS aqui
-            'autor' => htmlspecialchars($msg['chat_nickname']),
+            'id' => (int)$msg['mensagemID'],
+            'texto' => htmlspecialchars($msg['mensagem']),
+            'autor' => $autor,
             'hora' => date('H:i', strtotime($msg['dataEnvio'])),
-            'sou_eu' => ($msg['usuarioID'] == $meuID) // Flag para o CSS saber pintar de outra cor
+            'sou_eu' => $souEu,
+            'is_admin' => $isAdmin,
+            'user_id_real' => $idReal
         ];
     }
 
     echo json_encode($resultado);
 
-} catch (PDOException $e) {
-    echo json_encode(['error' => $e->getMessage()]);
+} catch (Exception $e) {
+    // Em caso de catástrofe, retorna vazio para destravar o load
+    echo json_encode([]);
 }
 ?>

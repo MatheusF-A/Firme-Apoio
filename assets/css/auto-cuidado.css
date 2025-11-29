@@ -127,10 +127,12 @@
     padding: 12px;
     border: 1px solid var(--cor-borda-clara); /* Refatorado */
     background-color: var(--cor-fundo-card); /* Refatorado */
+    color: var(--cor-texto-primaria);
     border-radius: 8px;
     font-size: 14px;
     box-sizing: border-box; 
     resize: vertical;
+    
 }
 
 /* Botão Enviar */
